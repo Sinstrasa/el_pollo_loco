@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <script src="scripts/game.js"></script>
-    <script src="script.js"></script>
     <title>El Pollo Loco</title>
     <link rel="shortcut icon" href="assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png" type="image/x-icon">
   </head>
-  <body>
+  <body onload="initialise()">
     <h1>El Pollo Loco</h1>
-    <canvas></canvas>
+    <canvas id="game"></canvas>
     <section>
         <p>W / I / Space / 🠝 - Jump</p>
         <p>A & D / J & L / 🠜 & 🠞 - Move Left & Right</p>
