@@ -2,21 +2,49 @@ class World {
   character = new Character();
   enemies = [new Chicken(), new Chicken(), new Chicken()];
   cloud = new Cloud();
+  background = [
+    new Background("assets/img/5_background/layers/air.png", 0),
+    new Background("assets/img/5_background/layers/3_third_layer/1.png", 0),
+    new Background("assets/img/5_background/layers/2_second_layer/1.png", 0),
+    new Background("assets/img/5_background/layers/1_first_layer/1.png", 0),
+  ];
   ctx;
   canvas;
+  keyboard;
 
-  constructor(canvas) {
+  constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
+    this.keyboard = keyboard;
     this.draw();
+    this.setWorld();
   }
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.drawImage(this.character.image, this.character.position_x, this.character.position_y, this.character.width, this.character.height);
-    this.ctx.drawImage(this.cloud.image, this.cloud.position_x, this.cloud.position_y, this.cloud.width, this.cloud.height);
-    this.enemies.forEach(enemy => {this.ctx.drawImage(enemy.image, enemy.position_x, enemy.position_y, enemy.width, enemy.height);});
+    this.addObjectToMap(this.background);
+    this.addToMap(this.cloud);
+    this.addObjectToMap(this.enemies);
+    this.addToMap(this.character);
     let self = this;
-    requestAnimationFrame(function(){self.draw();});
+    requestAnimationFrame(function () {self.draw();});
+  }
+
+  addObjectToMap(object) {
+    object.forEach((o) => {this.addToMap(o);});
+  }
+
+  addToMap(movingObject) {
+    this.ctx.drawImage(
+      movingObject.image,
+      movingObject.position_x,
+      movingObject.position_y,
+      movingObject.width,
+      movingObject.height,
+    );
+  }
+
+  setWorld() {
+    this.character.world = this;
   }
 }
