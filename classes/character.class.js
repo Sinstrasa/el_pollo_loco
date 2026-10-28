@@ -16,15 +16,26 @@ class Character extends MovableObject {
   }
 
   animate(frame, array) {
-    if(this.world.keyboard.RIGHT) {
-      setInterval(() => {
-      let index = this.currentImage % array.length;
-      let path = array[index];
-      this.image = this.imageCache[path];
-      if (index == (array.length - 1)) this.currentImage = 0;
-      else this.currentImage++;
+    setInterval(() => {
+      if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        this.playAnimation(array);
+      }
     }, 1000 / frame);
-    }
+    this.moveCharacter();
+  }
+
+  moveCharacter() {
+    setInterval(() => {
+      if(this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x) {
+        this.position_x += 7
+        this.mirrored = false;
+      }
+      if(this.world.keyboard.LEFT && this.position_x > -616) {
+        this.position_x -= 7;
+        this.mirrored = true;
+      }
+      this.world.camera_x = -this.position_x + 100;
+    }, 1000 / 60);
   }
 
   jump() {}
