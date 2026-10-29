@@ -12,99 +12,67 @@ document.addEventListener("keydown", (event) => keyPressed(event.key));
 document.addEventListener("keyup", (event) => keyReleased(event.key));
 
 function keyPressed(key) {
-    switch (key) {
-      case 'w':
-      case 'W':
-        keyboard.W = true;
-        break;
-      case 'a':
-      case 'A':
-        keyboard.A = true;
-        break;
-      case 'd':
-      case 'D':
-        keyboard.D = true;
-        break;
-      case 'ArrowLeft':
-        keyboard.LEFT = true;
-        break;
-      case 'ArrowUp':
-        keyboard.UP = true;
-        break;
-      case 'ArrowRight':
-        keyboard.RIGHT = true;
-        break;
-      case 'i':
-      case 'I':
-        keyboard.I = true;
-        break;
-      case 'j':
-      case 'J':
-        keyboard.J = true;
-        break;
-      case 'l':
-      case 'L':
-        keyboard.L = true;
-        break;
-      case ' ':
-        keyboard.SPACE = true;
-        break;
-      case 'Enter':
-        keyboard.ENTER = true;
-        break;
-      case 'Shift':
-        keyboard.SHIFT = true;
-        break;
-      default:
-        break;
-    }
+  switch (key) {
+    case "w":
+    case "W":
+    case "i":
+    case "I":
+    case " ":
+    case "ArrowUp":
+      keyboard.SPACE = true;
+      break;
+    case "a":
+    case "A":
+    case "j":
+    case "J":
+    case "ArrowLeft":
+      keyboard.LEFT = true;
+      break;
+    case "d":
+    case "D":
+    case "l":
+    case "L":
+    case "ArrowRight":
+      keyboard.RIGHT = true;
+      break;
+    case "Enter":
+    case "Shift":
+      keyboard.ENTER = true;
+      break;
+    default:
+      break;
   }
+}
 
-  function keyReleased(key) {
-    switch (key) {
-      case 'w':
-      case 'W':
-        keyboard.W = false;
-        break;
-      case 'a':
-      case 'A':
-        keyboard.A = false;
-        break;
-      case 'd':
-      case 'D':
-        keyboard.D = false;
-        break;
-      case 'ArrowLeft':
-        keyboard.LEFT = false;
-        break;
-      case 'ArrowUp':
-        keyboard.UP = false;
-        break;
-      case 'ArrowRight':
-        keyboard.RIGHT = false;
-        break;
-      case 'i':
-      case 'I':
-        keyboard.I = false;
-        break;
-      case 'j':
-      case 'J':
-        keyboard.J = false;
-        break;
-      case 'l':
-      case 'L':
-        keyboard.L = false;
-        break;
-      case ' ':
-        keyboard.SPACE = false;
-        break;
-      case 'Enter':
-        keyboard.ENTER = false;
-        break;
-      case 'Shift':
-        keyboard.SHIFT = false;
-        break;
-      default:
-        break;
-    }
+function keyReleased(key) {
+  switch (key) {
+    case "w":
+    case "W":
+    case "i":
+    case "I":
+    case " ":
+    case "ArrowUp":
+      keyboard.SPACE = false;
+      break;
+    case "a":
+    case "A":
+    case "j":
+    case "J":
+    case "ArrowLeft":
+      keyboard.LEFT = false;
+      break;
+    case "d":
+    case "D":
+    case "l":
+    case "L":
+    case "ArrowRight":
+      keyboard.RIGHT = false;
+      break;
+    case "Enter":
+    case "Shift":
+      keyboard.ENTER = false;
+      break;
+    default:
+      break;
   }
+}
