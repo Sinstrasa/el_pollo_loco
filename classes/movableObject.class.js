@@ -49,8 +49,14 @@ class MovableObject {
   // }
 
   moveLeft(speed) {
-    setInterval(() => {
       this.position_x -= speed;
-    }, 1000 / 60);
+      if (this instanceof Character) this.mirrored = true;
+      else this.mirrored = false;
+  }
+
+  moveRight(speed) {
+      this.position_x += speed;
+      if (this instanceof Character) this.mirrored = false;
+      else this.mirrored = true;
   }
 }

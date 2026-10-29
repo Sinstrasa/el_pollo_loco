@@ -27,12 +27,10 @@ class Character extends MovableObject {
   moveCharacter() {
     setInterval(() => {
       if(this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x) {
-        this.position_x += 7
-        this.mirrored = false;
+        this.moveRight(7);
       }
       if(this.world.keyboard.LEFT && this.position_x > -616) {
-        this.position_x -= 7;
-        this.mirrored = true;
+        this.moveLeft(7);
       }
       this.world.camera_x = -this.position_x + 100;
     }, 1000 / 60);

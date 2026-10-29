@@ -13,6 +13,15 @@ class SmallChicken extends MovableObject {
     this.position_x = start;
     this.position_y = 345;
     this.animate(9, this.IMAGES_WALKING);
-    this.moveLeft(0.5);
   }
+
+  moveTowardsCharacter(){
+    setInterval(() => {
+      if (this.world.character.position_x > this.position_x) {
+        this.moveRight(0.5);
+      } else {
+        this.moveLeft(0.5);
+      }
+    }, 1000 / 60);
+  };
 }
