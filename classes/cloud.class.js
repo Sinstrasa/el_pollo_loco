@@ -5,6 +5,8 @@ class Cloud extends MovableObject {
     this.position_x = start;
     this.width = 400;
     this.height = 250;
-    this.moveLeft(0.05);
+    setInterval(() => {
+      this.moveLeft(0.05);
+    }, 1000 / 60);
   }
 }

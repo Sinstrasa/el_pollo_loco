@@ -7,6 +7,8 @@ class MovableObject {
   imageCache = {};
   currentImage = 0;
   mirrored = false;
+  fallVelocity = 0;
+  acceleration = 0.5;
 
   loadImage(path) {
     this.image = new Image();
@@ -23,7 +25,7 @@ class MovableObject {
 
   animate(frame, array) {
     setInterval(() => {
-        this.playAnimation(array);
+      this.playAnimation(array);
     }, 1000 / frame);
   }
 
@@ -31,7 +33,7 @@ class MovableObject {
     let index = this.currentImage % animation.length;
     let path = animation[index];
     this.image = this.imageCache[path];
-    if (index == (animation.length - 1)) this.currentImage = 0;
+    if (index == animation.length - 1) this.currentImage = 0;
     else this.currentImage++;
   }
 
@@ -49,14 +51,27 @@ class MovableObject {
   // }
 
   moveLeft(speed) {
-      this.position_x -= speed;
-      if (this instanceof Character) this.mirrored = true;
-      else this.mirrored = false;
+    this.position_x -= speed;
+    if (this instanceof Character) this.mirrored = true;
+    else this.mirrored = false;
   }
 
   moveRight(speed) {
-      this.position_x += speed;
-      if (this instanceof Character) this.mirrored = false;
-      else this.mirrored = true;
+    this.position_x += speed;
+    if (this instanceof Character) this.mirrored = false;
+    else this.mirrored = true;
+  }
+
+  applyGravity() {
+    setInterval(() => {
+      if (this.isAboveGround() || this.fallVelocity > 0) {
+        this.position_y -= this.fallVelocity;
+        this.fallVelocity -= this.acceleration;
+      }
+    }, 1000 / 30);
+  }
+
+  isAboveGround() {
+    return this.position_y <= 175;
   }
 }
