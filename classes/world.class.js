@@ -116,7 +116,7 @@ class World {
   checkCollision() {
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
-        if(this.character.isColliding(enemy)) console.log(enemy.position_x, enemy.position_y, enemy.position_x + enemy.width, enemy.position_y + enemy.height);
+        if(this.character.isColliding(enemy)) console.log(this.character.position_x, this.character.position_y, this.character.position_x + this.character.width, this.character.position_y + this.character.height);
       });
     }, 1000 / 2);
   }

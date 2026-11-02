@@ -65,8 +65,8 @@ class MovableObject {
 
   isColliding(movingObject) {
     return this.position_x + this.width - this.offset.right > movingObject.position_x + movingObject.offset.left &&
-      this.position_y + this.height > movingObject.position_y &&
+      this.position_y + this.offset.top > movingObject.height - movingObject.offset.bottom &&
       this.position_x + this.offset.left < movingObject.position_x + movingObject.width - movingObject.offset.right &&
-      this.position_y < movingObject.position_y + movingObject.height;
+      this.height - this.offset.bottom < movingObject.position_y + movingObject.offset.top;
   }
 }

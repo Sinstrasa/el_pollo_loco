@@ -28,8 +28,7 @@ class Character extends MovableObject {
     super().loadImage("assets/img/2_character_pepe/1_idle/idle/I-1.png");
     this.loadSprites();
     this.animate(15);
-    // this.showPosition();
-    // this.applyGravity();
+    this.applyGravity();
   }
 
   loadSprites() {
@@ -39,18 +38,18 @@ class Character extends MovableObject {
   }
 
   animate(frame) {
-    // setInterval(() => {
-    //   if (this.world.keyboard.SPACE) {
-    //     this.playAnimation(this.IMAGES_JUMPING);
-    //     this.jump();
-    //   }
-    //   if (this.isAboveGround()) {
-    //     this.playAnimation(this.IMAGES_FALLING);
-    //   }
-    //   if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-    //     this.playAnimation(this.IMAGES_WALKING);
-    //   }
-    // }, 1000 / frame);
+    setInterval(() => {
+      if (this.world.keyboard.SPACE) {
+        this.playAnimation(this.IMAGES_JUMPING);
+        this.jump();
+      }
+      if (this.isAboveGround()) {
+        this.playAnimation(this.IMAGES_FALLING);
+      }
+      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        this.playAnimation(this.IMAGES_WALKING);
+      }
+    }, 1000 / frame);
     this.moveCharacter();
   }
 
@@ -73,16 +72,5 @@ class Character extends MovableObject {
     if (!this.isAboveGround()) {
       this.fallVelocity = 15;
     }
-  }
-
-  showPosition() {
-    setInterval(() => {
-      console.log(
-        this.position_x + this.offset.right,
-        this.position_y + this.offset.top,
-        this.width - this.offset.left,
-        this.height - this.offset.bottom
-      );
-    }, 1000);
   }
 }

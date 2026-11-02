@@ -14,7 +14,6 @@ class SmallChicken extends MovableObject {
     this.position_x = start;
     this.position_y = 345;
     this.animate(9, this.IMAGES_WALKING);
-    this.showPosition();
   }
 
   moveTowardsCharacter(){
@@ -25,16 +24,5 @@ class SmallChicken extends MovableObject {
         this.moveLeft(0.5);
       }
     }, 1000 / 60);
-  };
-
-  showPosition() {
-    setInterval(() => {
-      console.log(
-        this.position_x + this.offset.right,
-        this.position_y + this.offset.top,
-        this.width - this.offset.left,
-        this.height - this.offset.bottom
-      );
-    }, 1000);
   }
 }
