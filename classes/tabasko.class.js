@@ -8,10 +8,11 @@ class Tabasko extends MovableObject {
     "assets/img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
   ];
 
-  constructor(asset, position_x, position_y) {
+  constructor(asset, position_x, position_y, top, bottom, left, right) {
     super().loadImage(asset);
     this.loadImages(this.IMAGE_AIR);
     this.position_x = position_x;
     this.position_y = position_y;
+    this.offset = {top: top, bottom: bottom, left: left, right: right};
   }
 }

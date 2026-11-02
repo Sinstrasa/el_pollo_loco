@@ -9,6 +9,7 @@ class MovableObject {
   mirrored = false;
   fallVelocity = 0;
   acceleration = 0.5;
+  offset = {};
 
   loadImage(path) {
     this.image = new Image();
@@ -37,19 +38,6 @@ class MovableObject {
     else this.currentImage++;
   }
 
-  // moveCharacter() {
-  //   setInterval(() => {
-  //     if(this instanceof Character && this.world.keyboard.RIGHT) {
-  //       this.position_x += 7
-  //       this.mirrored = false;
-  //     }
-  //     if(this instanceof Character && this.world.keyboard.LEFT) {
-  //       this.position_x -= 7;
-  //       this.mirrored = true;
-  //     }
-  //   }, 1000 / 60);
-  // }
-
   moveLeft(speed) {
     this.position_x -= speed;
     if (this instanceof Character) this.mirrored = true;
@@ -73,5 +61,12 @@ class MovableObject {
 
   isAboveGround() {
     return this.position_y <= 175;
+  }
+
+  isColliding(movingObject) {
+    return this.position_x + this.width - this.offset.right > movingObject.position_x + movingObject.offset.left &&
+      this.position_y + this.height > movingObject.position_y &&
+      this.position_x + this.offset.left < movingObject.position_x + movingObject.width - movingObject.offset.right &&
+      this.position_y < movingObject.position_y + movingObject.height;
   }
 }

@@ -1,4 +1,5 @@
 class Chicken extends MovableObject {
+  offset = {top: 5, bottom: 15, left: 0, right: 0};
   IMAGES_WALKING = [
     "assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
     "assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
@@ -13,8 +14,20 @@ class Chicken extends MovableObject {
     this.width = 100;
     this.height = 125;
     this.animate(9, this.IMAGES_WALKING);
+    // this.showPosition();
     setInterval(() => {
       this.moveLeft(0.15 + Math.random() * 0.25);
     }, 1000 / 60);
+  }
+
+  showPosition() {
+    setInterval(() => {
+      console.log(
+        this.position_x + this.offset.right,
+        this.position_y + this.offset.top,
+        this.width - this.offset.left,
+        this.height - this.offset.bottom
+      );
+    }, 1000);
   }
 }
