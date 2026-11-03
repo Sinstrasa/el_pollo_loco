@@ -10,6 +10,8 @@ class MovableObject {
   fallVelocity = 0;
   acceleration = 0.5;
   offset = {};
+  health = 100;
+  lastHit = 0;
 
   loadImage(path) {
     this.image = new Image();
@@ -64,9 +66,40 @@ class MovableObject {
   }
 
   isColliding(movingObject) {
-    return this.position_x + this.width - this.offset.right > movingObject.position_x + movingObject.offset.left &&
-      this.position_y + this.offset.top > movingObject.height - movingObject.offset.bottom &&
-      this.position_x + this.offset.left < movingObject.position_x + movingObject.width - movingObject.offset.right &&
-      this.height - this.offset.bottom < movingObject.position_y + movingObject.offset.top;
+    const thisLeft = this.position_x + this.offset.left;
+    const thisRight = this.position_x + this.width - this.offset.right;
+    const thisTop = this.position_y + this.offset.top;
+    const thisBottom = this.position_y + this.height;
+    const objectLeft = movingObject.position_x + movingObject.offset.left;
+    const objectRight = movingObject.position_x + movingObject.width - movingObject.offset.right;
+    const objectTop = movingObject.position_y + movingObject.offset.top;
+    const objectBottom = movingObject.position_y + movingObject.height - movingObject.offset.bottom;
+    return thisLeft < objectRight && thisRight > objectLeft && thisTop < objectBottom && thisBottom > objectTop;
+  }
+
+  jumpsOnEnemy(movingObject) {
+    const thisLeft = this.position_x + this.offset.left;
+    const thisRight = this.position_x + this.width - this.offset.right;
+    const thisBottom = this.position_y + this.height;
+    const objectLeft = movingObject.position_x + movingObject.offset.left;
+    const objectRight = movingObject.position_x + movingObject.width - movingObject.offset.right;
+    const objectTop = movingObject.position_y + movingObject.offset.top;
+    return thisLeft < objectRight && thisRight > objectLeft && thisBottom > objectTop;
+  }
+
+  hit(damage) {
+    this.health -= damage;
+    if(this.health < 0) this.health = 0;
+    else this.lastHit = new Date().getTime();
+  }
+
+  isHurt() {
+    let timepassed = new Date().getTime() - this.lastHit;
+    timepassed = timepassed / 1000;
+    return timepassed < 1;
+  }
+
+  isDead() {
+    return this.health == 0;
   }
 }

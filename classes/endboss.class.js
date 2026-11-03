@@ -24,13 +24,29 @@ class Endboss extends MovableObject {
     "assets/img/4_enemie_boss_chicken/3_attack/G20.png",
     "assets/img/4_enemie_boss_chicken/3_attack/G19.png",
   ];
+  IMAGES_HURT = [
+    "assets/img/4_enemie_boss_chicken/4_hurt/G21.png",
+    "assets/img/4_enemie_boss_chicken/4_hurt/G22.png",
+    "assets/img/4_enemie_boss_chicken/4_hurt/G23.png",
+  ];
+  IMAGES_DEATH = [
+    "assets/img/4_enemie_boss_chicken/5_dead/G24.png",
+    "assets/img/4_enemie_boss_chicken/5_dead/G25.png",
+    "assets/img/4_enemie_boss_chicken/5_dead/G26.png",
+  ];
 
   constructor() {
     super().loadImage("assets/img/4_enemie_boss_chicken/3_attack/G20.png");
+    this.loadSprites();
+    // this.bossActivates();
+  }
+
+  loadSprites() {
     this.loadImages(this.IMAGES_WALK);
     this.loadImages(this.IMAGES_ALERT);
     this.loadImages(this.IMAGES_WAKE_UP);
-    // this.bossActivates();
+    this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.IMAGES_DEATH);
   }
 
   bossActivates() {

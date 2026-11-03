@@ -62,7 +62,7 @@ class World {
       movingObject.position_y,
       movingObject.width,
       movingObject.height);
-    this.showHitbox(movingObject);
+    // this.showHitbox(movingObject);
     this.showHitboxTight(movingObject);
     this.mirrorImageReverse(movingObject);
   }
@@ -116,16 +116,27 @@ class World {
   checkCollision() {
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
-        if(this.character.isColliding(enemy)) console.log(this.character.position_x, this.character.position_y, this.character.position_x + this.character.width, this.character.position_y + this.character.height);
+        if (enemy.isDead()) return;
+        else {
+          if (this.character.fallVelocity < 0 && this.character.jumpsOnEnemy(enemy)) {
+           this.character.jump();
+          enemy.hit(100);
+          } else {
+            if(this.character.isColliding(enemy)) {
+            this.character.hit(5);
+            console.log(this.character.health);
+            }
+          }
+        }
       });
-    }, 1000 / 2);
+    }, 1000 / 30);
   }
 
   setWorld() {
     this.character.world = this;
     this.level.enemies.forEach((enemy) => {
       enemy.world = this;
-      if(enemy instanceof SmallChicken) enemy.moveTowardsCharacter();
+      if(enemy instanceof SmallChicken) enemy.actions();
     })
   }
 }
