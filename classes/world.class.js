@@ -62,8 +62,7 @@ class World {
       movingObject.position_y,
       movingObject.width,
       movingObject.height);
-    // this.showHitbox(movingObject);
-    this.showHitboxTight(movingObject);
+    this.showHitbox(movingObject);
     this.mirrorImageReverse(movingObject);
   }
 
@@ -84,21 +83,6 @@ class World {
   }
 
   showHitbox(movingObject) {
-    if(movingObject instanceof Character || movingObject instanceof Chicken || movingObject instanceof SmallChicken || movingObject instanceof Coin || movingObject instanceof Tabasko || movingObject instanceof Endboss) {
-    this.ctx.beginPath();
-    this.ctx.lineWidth = "3";
-    this.ctx.strokeStyle = "blue";
-    this.ctx.rect(
-      movingObject.position_x,
-      movingObject.position_y,
-      movingObject.width,
-      movingObject.height
-    );
-    this.ctx.stroke();
-    }
-  }
-
-  showHitboxTight(movingObject) {
     if(movingObject instanceof Character || movingObject instanceof Chicken || movingObject instanceof SmallChicken || movingObject instanceof Coin || movingObject instanceof Tabasko || movingObject instanceof Endboss) {
     this.ctx.beginPath();
     this.ctx.lineWidth = "3";
@@ -124,7 +108,6 @@ class World {
           } else {
             if(this.character.isColliding(enemy)) {
             this.character.hit(5);
-            console.log(this.character.health);
             }
           }
         }

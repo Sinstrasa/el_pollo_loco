@@ -66,25 +66,32 @@ class MovableObject {
   }
 
   isColliding(movingObject) {
-    const thisLeft = this.position_x + this.offset.left;
-    const thisRight = this.position_x + this.width - this.offset.right;
-    const thisTop = this.position_y + this.offset.top;
-    const thisBottom = this.position_y + this.height;
-    const objectLeft = movingObject.position_x + movingObject.offset.left;
-    const objectRight = movingObject.position_x + movingObject.width - movingObject.offset.right;
-    const objectTop = movingObject.position_y + movingObject.offset.top;
-    const objectBottom = movingObject.position_y + movingObject.height - movingObject.offset.bottom;
-    return thisLeft < objectRight && thisRight > objectLeft && thisTop < objectBottom && thisBottom > objectTop;
+    return this.hitLeft(movingObject) &&
+      this.hitRight(movingObject) &&
+      this.hitTop(movingObject) &&
+      this.hitBottom(movingObject);
   }
 
   jumpsOnEnemy(movingObject) {
-    const thisLeft = this.position_x + this.offset.left;
-    const thisRight = this.position_x + this.width - this.offset.right;
-    const thisBottom = this.position_y + this.height;
-    const objectLeft = movingObject.position_x + movingObject.offset.left;
-    const objectRight = movingObject.position_x + movingObject.width - movingObject.offset.right;
-    const objectTop = movingObject.position_y + movingObject.offset.top;
-    return thisLeft < objectRight && thisRight > objectLeft && thisBottom > objectTop;
+    return this.hitLeft(movingObject) &&
+      this.hitRight(movingObject) &&
+      this.hitBottom(movingObject);
+  }
+
+  hitLeft(movingObject) {
+    return this.position_x + this.offset.left < movingObject.position_x + movingObject.width - movingObject.offset.right;
+  }
+
+  hitRight(movingObject) {
+    return this.position_x + this.width - this.offset.right > movingObject.position_x + movingObject.offset.left;
+  }
+
+  hitTop(movingObject) {
+    return this.position_y + this.offset.top < movingObject.position_y + movingObject.height - movingObject.offset.bottom;
+  }
+
+  hitBottom(movingObject) {
+    return this.position_y + this.height > movingObject.position_y + movingObject.offset.top;
   }
 
   hit(damage) {
