@@ -1,30 +1,10 @@
-class MovableObject {
-  position_x = 0;
-  position_y = 175;
-  image;
-  height = 250;
-  width = 125;
-  imageCache = {};
-  currentImage = 0;
+class MovableObject extends DrawableObject {
   mirrored = false;
   fallVelocity = 0;
   acceleration = 0.5;
   offset = {};
   health = 100;
   lastHit = 0;
-
-  loadImage(path) {
-    this.image = new Image();
-    this.image.src = path;
-  }
-
-  loadImages(array) {
-    array.forEach((path) => {
-      let img = new Image();
-      img.src = path;
-      this.imageCache[path] = img;
-    });
-  }
 
   animate(frame, array) {
     setInterval(() => {

@@ -5,6 +5,7 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
+  statusbar = new Statusbar();
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -36,6 +37,9 @@ class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
     this.addLevelObjects();
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.statusbar);
+    this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
     this.ctx.translate(-this.camera_x, 0);
     let self = this;
@@ -107,7 +111,8 @@ class World {
           enemy.hit(100);
           } else {
             if(this.character.isColliding(enemy)) {
-            this.character.hit(5);
+            this.character.hit(1);
+            this.statusbar.setPercentage(this.character.health);
             }
           }
         }
