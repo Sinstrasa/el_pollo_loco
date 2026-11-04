@@ -11,6 +11,12 @@ const level1 = new Level(
     new Endboss(),
   ],
   [
+    new Statusbar("assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png", 0, 100, 25, 0),
+    new Statusbar("assets/img/7_statusbars/1_statusbar/1_statusbar_coin/blue/100.png", 1, 0, 25, 40),
+    new Statusbar("assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png", 2, 0, 25, 80),
+    new Statusbar("assets/img/7_statusbars/2_statusbar_endboss/orange/orange100.png", 3, 100, 200, 7),
+  ],
+  [
     new Cloud("assets/img/5_background/layers/4_clouds/2.png", -364),
     new Cloud("assets/img/5_background/layers/4_clouds/1.png", 45),
     new Cloud("assets/img/5_background/layers/4_clouds/2.png", 627),

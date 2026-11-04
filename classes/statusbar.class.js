@@ -1,6 +1,4 @@
 class Statusbar extends DrawableObject {
-  position_x = 0;
-  position_y = 0;
   width = 160;
   height = 50;
   percentage = 100;
@@ -37,10 +35,12 @@ class Statusbar extends DrawableObject {
     "assets/img/7_statusbars/2_statusbar_endboss/orange/orange100.png",
   ];
 
-  constructor() {
-    super().loadImage("assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png");
+  constructor(asset, index, percentage, position_x, position_y) {
+    super().loadImage(asset);
     this.loadSprites();
-    this.setPercentage(100);
+    this.position_x = position_x;
+    this.position_y = position_y;
+    this.setPercentage(index, percentage);
   }
 
   loadSprites() {
@@ -50,10 +50,23 @@ class Statusbar extends DrawableObject {
     this.loadImages(this.IMAGES_ENDBOSS);
   }
 
-  setPercentage(percentage) {
+  setPercentage(index, percentage) {
     this.percentage = percentage;
-    let path = this.IMAGES_HEALTH[this.resolveImageIndex()];
+    let path = this.indexToAsset(index)[this.resolveImageIndex()];
     this.image = this.imageCache[path];
+  }
+
+  indexToAsset(index) {
+    switch (index) {
+      case 3:
+        return this.IMAGES_ENDBOSS;
+      case 2:
+        return this.IMAGES_TABASKO;
+      case 1:
+        return this.IMAGES_COIN;
+      default:
+        return this.IMAGES_HEALTH;
+    }
   }
 
   resolveImageIndex() {

@@ -5,7 +5,6 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
-  statusbar = new Statusbar();
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -38,7 +37,7 @@ class World {
     this.ctx.translate(this.camera_x, 0);
     this.addLevelObjects();
     this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusbar);
+    this.addObjectToMap(this.level.statusbar);
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
     this.ctx.translate(-this.camera_x, 0);
@@ -103,21 +102,25 @@ class World {
 
   checkCollision() {
     setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (enemy.isDead()) return;
-        else {
-          if (this.character.fallVelocity < 0 && this.character.jumpsOnEnemy(enemy)) {
-           this.character.jump();
-          enemy.hit(100);
-          } else {
-            if(this.character.isColliding(enemy)) {
-            this.character.hit(1);
-            this.statusbar.setPercentage(this.character.health);
-            }
+      this.checkHitboxCharacterEnemy();
+    }, 1000 / 30);
+  }
+
+  checkHitboxCharacterEnemy() {
+    this.level.enemies.forEach((enemy) => {
+      if (enemy.isDead()) return;
+      else {
+        if (this.character.fallVelocity < 0 && this.character.jumpsOnEnemy(enemy)) {
+         this.character.jump();
+        enemy.hit(100);
+        } else {
+          if(this.character.isColliding(enemy)) {
+          this.character.hit(1);
+          this.level.statusbar[0].setPercentage(this.character.health);
           }
         }
-      });
-    }, 1000 / 30);
+      }
+    });
   }
 
   setWorld() {

@@ -26,7 +26,7 @@ class Chicken extends MovableObject {
   actions() {
     setInterval(() => {
       if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEATH);
+        this.loadImage(this.IMAGES_DEATH);
       } else {
         this.moveLeft(0.15 + Math.random() * 0.25);
       }
