@@ -7,11 +7,18 @@ class Coin extends MovableObject {
     "assets/img/8_coin/coin_1.png",
   ];
 
-  constructor(position_x, position_y) {
+  constructor(position_x, position_y, id) {
     super().loadImage("assets/img/8_coin/coin_1.png");
     this.loadImages(this.IMAGE_PULSE);
     this.position_x = position_x;
     this.position_y = position_y;
-    this.animate(7, this.IMAGE_PULSE);
+    this.id = id;
+    this.intervalIdCollection(() => this.animate(this.IMAGE_PULSE), 1000 / 7);
+    // this.animate(this.IMAGE_PULSE, 7);
+    console.log("Coins: " + this.setIntervalIdArray);
+  }
+
+  isCollected() {
+    this.loadImage("");
   }
 }

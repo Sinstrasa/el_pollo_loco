@@ -7,8 +7,6 @@ class DrawableObject {
   imageCache = {};
   currentImage = 0;
 
-  constructor() {}
-
   loadImage(path) {
     this.image = new Image();
     this.image.src = path;

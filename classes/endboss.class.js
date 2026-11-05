@@ -49,26 +49,26 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEATH);
   }
 
-  bossActivates() {
-    setTimeout(() => this.bossIntro(), 0);
-    setTimeout(() => this.bossAlert(), 4000);
-    setTimeout(() => this.bossMoves(), 13000);
-  }
+  // bossActivates() {
+  //   setTimeout(() => this.bossIntro(), 0);
+  //   setTimeout(() => this.bossAlert(), 4000);
+  //   setTimeout(() => this.bossMoves(), 13000);
+  // }
 
-  bossIntro() {
-    for (let index = 0; index < 3; index++) {
-      this.animate(1, this.IMAGES_WAKE_UP);
-    }
-  }
+  // bossIntro() {
+  //   for (let index = 0; index < 3; index++) {
+  //     this.animate(1, this.IMAGES_WAKE_UP);
+  //   }
+  // }
 
-  bossAlert() {
-    this.animate(1, this.IMAGES_ALERT);
-  }
+  // bossAlert() {
+  //   this.animate(1, this.IMAGES_ALERT);
+  // }
 
-  bossMoves() {
-    this.animate(7, this.IMAGES_WALK);
-    setInterval(() => {
-      this.moveLeft(2);
-    }, 1000 / 60);
-  }
+  // bossMoves() {
+  //   this.animate(7, this.IMAGES_WALK);
+  //   setInterval(() => {
+  //     this.moveLeft(2);
+  //   }, 1000 / 60);
+  // }
 }

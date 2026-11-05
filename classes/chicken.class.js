@@ -14,8 +14,11 @@ class Chicken extends MovableObject {
     super().loadImage("assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png");
     this.loadSprites();
     this.position_x = start;
-    this.animate(9, this.IMAGES_WALKING);
-    this.actions();
+    this.intervalIdCollection(() => this.animate(this.IMAGES_WALKING), 1000 / 9);
+    // this.animate(this.IMAGES_WALKING, 9);
+    this.intervalIdCollection(() => this.actions(), 1000 / 60);
+    // this.actions();
+    console.log("Chicken: " + this.setIntervalIdArray);
   }
 
   loadSprites() {
@@ -24,12 +27,19 @@ class Chicken extends MovableObject {
   }
 
   actions() {
-    setInterval(() => {
-      if (this.isDead()) {
-        this.loadImage(this.IMAGES_DEATH);
-      } else {
-        this.moveLeft(0.15 + Math.random() * 0.25);
-      }
-    }, 1000 / 60);
+    if (this.isDead()) {
+      this.loadImage(this.IMAGES_DEATH);
+    } else {
+      this.moveLeft(0.15 + Math.random() * 0.25);
+    }
   }
+  // actions() {
+  //   setInterval(() => {
+  //     if (this.isDead()) {
+  //       this.loadImage(this.IMAGES_DEATH);
+  //     } else {
+  //       this.moveLeft(0.15 + Math.random() * 0.25);
+  //     }
+  //   }, 1000 / 60);
+  // }
 }

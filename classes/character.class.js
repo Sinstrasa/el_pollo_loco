@@ -1,7 +1,8 @@
 class Character extends MovableObject {
   position_y = 175.5;
   world;
-  offset = { top: 100, bottom: 110, left: 40, right: 20 };
+  sumCollected = [0, 0];
+  offset = {top: 100, bottom: 110, left: 40, right: 20};
   IMAGES_WALKING = [
     "assets/img/2_character_pepe/2_walk/W-21.png",
     "assets/img/2_character_pepe/2_walk/W-22.png",
@@ -41,8 +42,12 @@ class Character extends MovableObject {
   constructor() {
     super().loadImage("assets/img/2_character_pepe/1_idle/idle/I-1.png");
     this.loadSprites();
-    this.animate(15);
-    this.applyGravity();
+    this.intervalIdCollection(() => this.animate(), 1000 / 15);
+    this.intervalIdCollection(() => this.moveCharacter(), 1000 / 60);
+    // this.animate(15);
+    this.intervalIdCollection(() => this.applyGravity(), 1000 / 30);
+    // this.applyGravity();
+    console.log("Character: " + this.setIntervalIdArray);
   }
 
   loadSprites() {
@@ -53,49 +58,89 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_DEATH);
   }
 
-  animate(frame) {
-    setInterval(() => {
-      if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEATH);
+  animate() {
+    if (this.isDead()) {
+      this.playAnimation(this.IMAGES_DEATH);
+    } else {
+      if (this.isHurt()) {
+        this.playAnimation(this.IMAGES_HURT);
       } else {
-        if (this.isHurt()) {
-          this.playAnimation(this.IMAGES_HURT);
+        if (this.world.keyboard.SPACE) {
+          this.playAnimation(this.IMAGES_JUMPING);
         } else {
-          if (this.world.keyboard.SPACE) {
-            this.playAnimation(this.IMAGES_JUMPING);
+          if (this.isAboveGround()) {
+            this.playAnimation(this.IMAGES_FALLING);
           } else {
-            if (this.isAboveGround()) {
-              this.playAnimation(this.IMAGES_FALLING);
-            } else {
-              if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.playAnimation(this.IMAGES_WALKING);
-              }
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+              this.playAnimation(this.IMAGES_WALKING);
             }
           }
         }
       }
-    }, 1000 / frame);
-    this.moveCharacter();
+    }
   }
+  // animate(frame) {
+  //   setInterval(() => {
+  //     if (this.isDead()) {
+  //       this.playAnimation(this.IMAGES_DEATH);
+  //     } else {
+  //       if (this.isHurt()) {
+  //         this.playAnimation(this.IMAGES_HURT);
+  //       } else {
+  //         if (this.world.keyboard.SPACE) {
+  //           this.playAnimation(this.IMAGES_JUMPING);
+  //         } else {
+  //           if (this.isAboveGround()) {
+  //             this.playAnimation(this.IMAGES_FALLING);
+  //           } else {
+  //             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+  //               this.playAnimation(this.IMAGES_WALKING);
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }, 1000 / frame);
+  //   this.moveCharacter();
+  // }
 
   moveCharacter() {
-    setInterval(() => {
-      if (this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x) {
-        this.moveRight(7);
+    if (this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x) {
+      this.moveRight(7);
+    }
+    if (this.world.keyboard.LEFT && this.position_x > -616) {
+      this.moveLeft(7);
+    }
+    if (this.world.keyboard.SPACE) {
+      if(!this.isAboveGround()) {
+        this.jump();
       }
-      if (this.world.keyboard.LEFT && this.position_x > -616) {
-        this.moveLeft(7);
-      }
-      if (this.world.keyboard.SPACE) {
-        if(!this.isAboveGround()) {
-          this.jump();
-        }
-      }
+    }
       this.world.camera_x = -this.position_x + 100;
-    }, 1000 / 60);
   }
+  // moveCharacter() {
+  //   setInterval(() => {
+  //     if (this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x) {
+  //       this.moveRight(7);
+  //     }
+  //     if (this.world.keyboard.LEFT && this.position_x > -616) {
+  //       this.moveLeft(7);
+  //     }
+  //     if (this.world.keyboard.SPACE) {
+  //       if(!this.isAboveGround()) {
+  //         this.jump();
+  //       }
+  //     }
+  //     this.world.camera_x = -this.position_x + 100;
+  //   }, 1000 / 60);
+  // }
 
   jump() {
     this.fallVelocity = 15;
+  }
+
+  collectCollectable(index) {
+    this.sumCollected[index]++;
+    console.log(this.sumCollected[index]++);
   }
 }

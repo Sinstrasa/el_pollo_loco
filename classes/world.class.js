@@ -5,6 +5,7 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
+  setIntervalIdArray = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -13,7 +14,14 @@ class World {
     this.createBackground();
     this.draw();
     this.setWorld();
-    this.checkCollision();
+    this.intervalIdCollection(() => this.run(), 1000 / 30);
+    // this.run();
+    console.log("World: " + this.setIntervalIdArray);
+  }
+
+  intervalIdCollection(func, frame) {
+    let id = setInterval(func, frame);
+    this.setIntervalIdArray.push(id);
   }
 
   createBackground() {
@@ -100,11 +108,16 @@ class World {
     }
   }
 
-  checkCollision() {
-    setInterval(() => {
-      this.checkHitboxCharacterEnemy();
-    }, 1000 / 30);
+  run() {
+    this.checkHitboxCharacterEnemy();
+    this.checkHitboxCharacterCollectable();
   }
+  // run() {
+  //   setInterval(() => {
+  //     this.checkHitboxCharacterEnemy();
+  //     this.checkHitboxCharacterCollectable();
+  //   }, 1000 / 30);
+  // }
 
   checkHitboxCharacterEnemy() {
     this.level.enemies.forEach((enemy) => {
@@ -116,18 +129,41 @@ class World {
         } else {
           if(this.character.isColliding(enemy)) {
           this.character.hit(1);
-          this.level.statusbar[0].setPercentage(this.character.health);
+          this.level.statusbar[0].setPercentage(0, this.character.health);
           }
         }
       }
     });
   }
 
+  checkHitboxCharacterCollectable() {
+    this.level.coin.forEach((coin) => {
+      if(this.character.isColliding(coin)) {
+        this.character.collectCollectable(0);
+        coin.isCollected();
+        // this.level.coin[coin.id] = "Empty";
+      }
+    })
+    this.level.tabasko.forEach((bottle) => {
+      if(this.character.isColliding(bottle)) {
+        this.character.collectCollectable(1);
+      }
+    })
+  }
+
   setWorld() {
     this.character.world = this;
     this.level.enemies.forEach((enemy) => {
       enemy.world = this;
-      if(enemy instanceof SmallChicken) enemy.actions();
-    })
+      if(enemy instanceof SmallChicken) {
+        enemy.intervalIdCollection(() => enemy.actions(), 1000 / 60);
+        // enemy.actions();
+      };
+    });
+    this.level.tabasko.forEach((bottle) => {
+      bottle.world = this;
+      bottle.throw();
+    });
   }
+
 }

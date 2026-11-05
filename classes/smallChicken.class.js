@@ -14,7 +14,9 @@ class SmallChicken extends MovableObject {
     this.loadSprites();
     this.position_x = start;
     this.position_y = 345;
-    this.animate(9, this.IMAGES_WALKING);
+    this.intervalIdCollection(() => this.animate(this.IMAGES_WALKING), 1000 / 9);
+    // this.animate(9, this.IMAGES_WALKING);
+    console.log("Small Chicken: " + this.setIntervalIdArray);
   }
 
   loadSprites() {
@@ -23,8 +25,7 @@ class SmallChicken extends MovableObject {
   }
 
   actions() {
-    setInterval(() => {
-      if (this.isDead()) {
+    if (this.isDead()) {
         this.loadImage(this.IMAGES_DEATH);
       } else {
         if (this.world.character.position_x > this.position_x - 25) {
@@ -33,6 +34,18 @@ class SmallChicken extends MovableObject {
         this.moveLeft(0.5);
       }
       }
-    }, 1000 / 60);
   }
+  // actions() {
+  //   setInterval(() => {
+  //     if (this.isDead()) {
+  //       this.loadImage(this.IMAGES_DEATH);
+  //     } else {
+  //       if (this.world.character.position_x > this.position_x - 25) {
+  //       this.moveRight(0.5);
+  //     } else {
+  //       this.moveLeft(0.5);
+  //     }
+  //     }
+  //   }, 1000 / 60);
+  // }
 }

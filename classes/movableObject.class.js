@@ -5,12 +5,23 @@ class MovableObject extends DrawableObject {
   offset = {};
   health = 100;
   lastHit = 0;
+  sumCollected;
+  id;
+  setIntervalIdArray = [];
 
-  animate(frame, array) {
-    setInterval(() => {
-      this.playAnimation(array);
-    }, 1000 / frame);
+  intervalIdCollection(func, frame) {
+    let id = setInterval(func, frame);
+    this.setIntervalIdArray.push(id);
   }
+
+  animate(array) {
+      this.playAnimation(array);
+  }
+  // animate(array, frame) {
+  //   setInterval(() => {
+  //     this.playAnimation(array);
+  //   }, 1000 / frame);
+  // }
 
   playAnimation(animation) {
     let index = this.currentImage % animation.length;
@@ -33,16 +44,23 @@ class MovableObject extends DrawableObject {
   }
 
   applyGravity() {
-    setInterval(() => {
-      if (this.isAboveGround() || this.fallVelocity > 0) {
-        this.position_y -= this.fallVelocity;
-        this.fallVelocity -= this.acceleration;
-      }
-    }, 1000 / 30);
+    if (this.isAboveGround() || this.fallVelocity > 0) {
+      this.position_y -= this.fallVelocity;
+      this.fallVelocity -= this.acceleration;
+    }
   }
+  // applyGravity() {
+  //   setInterval(() => {
+  //     if (this.isAboveGround() || this.fallVelocity > 0) {
+  //       this.position_y -= this.fallVelocity;
+  //       this.fallVelocity -= this.acceleration;
+  //     }
+  //   }, 1000 / 30);
+  // }
 
   isAboveGround() {
-    return this.position_y <= 175;
+    if (this instanceof Tabasko) return true;
+    else return this.position_y <= 175;
   }
 
   isColliding(movingObject) {
