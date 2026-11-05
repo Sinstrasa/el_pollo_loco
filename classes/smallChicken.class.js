@@ -27,6 +27,7 @@ class SmallChicken extends MovableObject {
   actions() {
     if (this.isDead()) {
         this.loadImage(this.IMAGES_DEATH);
+        this.stopInterval(this.setIntervalIdArray[0]);
       } else {
         if (this.world.character.position_x > this.position_x - 25) {
         this.moveRight(0.5);

@@ -110,7 +110,7 @@ class World {
 
   run() {
     this.checkHitboxCharacterEnemy();
-    this.checkHitboxCharacterCollectable();
+    // this.checkHitboxCharacterCollectable();
   }
   // run() {
   //   setInterval(() => {
@@ -141,6 +141,7 @@ class World {
       if(this.character.isColliding(coin)) {
         this.character.collectCollectable(0);
         coin.isCollected();
+        // coin.stopInterval(this.setIntervalIdArray[0]);
         // this.level.coin[coin.id] = "Empty";
       }
     })

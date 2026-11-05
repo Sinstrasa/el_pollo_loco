@@ -60,7 +60,7 @@ class Character extends MovableObject {
 
   animate() {
     if (this.isDead()) {
-      this.playAnimation(this.IMAGES_DEATH);
+      this.deathAnimation();
     } else {
       if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
@@ -103,6 +103,11 @@ class Character extends MovableObject {
   //   }, 1000 / frame);
   //   this.moveCharacter();
   // }
+
+  deathAnimation() {
+    this.playAnimation(this.IMAGES_DEATH);
+    // this.stopInterval(this.setIntervalIdArray[0]);
+  }
 
   moveCharacter() {
     if (this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x) {

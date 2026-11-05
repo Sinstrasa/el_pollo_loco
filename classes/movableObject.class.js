@@ -14,6 +14,10 @@ class MovableObject extends DrawableObject {
     this.setIntervalIdArray.push(id);
   }
 
+  stopInterval(id) {
+    clearInterval(id);
+  }
+
   animate(array) {
       this.playAnimation(array);
   }
@@ -47,6 +51,9 @@ class MovableObject extends DrawableObject {
     if (this.isAboveGround() || this.fallVelocity > 0) {
       this.position_y -= this.fallVelocity;
       this.fallVelocity -= this.acceleration;
+    } else this.fallVelocity = 0;
+    if (this instanceof Character && this.position_y > 175.5) {
+      this.position_y = 175.5;
     }
   }
   // applyGravity() {
