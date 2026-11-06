@@ -6,6 +6,7 @@ class DrawableObject {
   image;
   imageCache = {};
   currentImage = 0;
+  collectable;
 
   loadImage(path) {
     this.image = new Image();

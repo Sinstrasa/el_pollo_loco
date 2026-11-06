@@ -15,9 +15,7 @@ class Chicken extends MovableObject {
     this.loadSprites();
     this.position_x = start;
     this.intervalIdCollection(() => this.animate(this.IMAGES_WALKING), 1000 / 9);
-    // this.animate(this.IMAGES_WALKING, 9);
     this.intervalIdCollection(() => this.actions(), 1000 / 60);
-    // this.actions();
     console.log("Chicken: " + this.setIntervalIdArray);
   }
 
@@ -34,13 +32,4 @@ class Chicken extends MovableObject {
       this.moveLeft(0.15 + Math.random() * 0.25);
     }
   }
-  // actions() {
-  //   setInterval(() => {
-  //     if (this.isDead()) {
-  //       this.loadImage(this.IMAGES_DEATH);
-  //     } else {
-  //       this.moveLeft(0.15 + Math.random() * 0.25);
-  //     }
-  //   }, 1000 / 60);
-  // }
 }

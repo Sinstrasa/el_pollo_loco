@@ -21,11 +21,6 @@ class MovableObject extends DrawableObject {
   animate(array) {
       this.playAnimation(array);
   }
-  // animate(array, frame) {
-  //   setInterval(() => {
-  //     this.playAnimation(array);
-  //   }, 1000 / frame);
-  // }
 
   playAnimation(animation) {
     let index = this.currentImage % animation.length;

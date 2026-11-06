@@ -15,7 +15,6 @@ class World {
     this.draw();
     this.setWorld();
     this.intervalIdCollection(() => this.run(), 1000 / 30);
-    // this.run();
     console.log("World: " + this.setIntervalIdArray);
   }
 
@@ -73,7 +72,7 @@ class World {
       movingObject.position_y,
       movingObject.width,
       movingObject.height);
-    this.showHitbox(movingObject);
+    // this.showHitbox(movingObject);
     this.mirrorImageReverse(movingObject);
   }
 
@@ -110,14 +109,8 @@ class World {
 
   run() {
     this.checkHitboxCharacterEnemy();
-    // this.checkHitboxCharacterCollectable();
+    this.checkHitboxCharacterCollectable();
   }
-  // run() {
-  //   setInterval(() => {
-  //     this.checkHitboxCharacterEnemy();
-  //     this.checkHitboxCharacterCollectable();
-  //   }, 1000 / 30);
-  // }
 
   checkHitboxCharacterEnemy() {
     this.level.enemies.forEach((enemy) => {
@@ -139,15 +132,19 @@ class World {
   checkHitboxCharacterCollectable() {
     this.level.coin.forEach((coin) => {
       if(this.character.isColliding(coin)) {
-        this.character.collectCollectable(0);
+        this.character.collectCollectable(0, coin.taken);
         coin.isCollected();
-        // coin.stopInterval(this.setIntervalIdArray[0]);
-        // this.level.coin[coin.id] = "Empty";
+        coin.taken = true;
+        this.level.statusbar[2].setPercentage(2, Math.round((this.character.sumCollected[0] / coin.collectable) * 100));
+        coin.stopInterval(coin.setIntervalIdArray[0]);
       }
     })
     this.level.tabasko.forEach((bottle) => {
       if(this.character.isColliding(bottle)) {
-        this.character.collectCollectable(1);
+        this.character.collectCollectable(1, bottle.taken);
+        bottle.isCollected();
+        bottle.taken = true;
+        this.level.statusbar[1].setPercentage(1, Math.round((this.character.sumCollected[1] / bottle.collectable) * 100));
       }
     })
   }
@@ -158,12 +155,10 @@ class World {
       enemy.world = this;
       if(enemy instanceof SmallChicken) {
         enemy.intervalIdCollection(() => enemy.actions(), 1000 / 60);
-        // enemy.actions();
       };
     });
     this.level.tabasko.forEach((bottle) => {
       bottle.world = this;
-      bottle.throw();
     });
   }
 

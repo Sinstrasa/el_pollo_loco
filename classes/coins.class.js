@@ -1,20 +1,20 @@
 class Coin extends MovableObject {
   width = 125;
   height = 125;
+  collectable = 15;
+  taken = false;
   offset = {top: 40, bottom: 80, left: 80, right: 40};
   IMAGE_PULSE = [
     "assets/img/8_coin/coin_2.png",
     "assets/img/8_coin/coin_1.png",
   ];
 
-  constructor(position_x, position_y, id) {
+  constructor(position_x, position_y) {
     super().loadImage("assets/img/8_coin/coin_1.png");
     this.loadImages(this.IMAGE_PULSE);
     this.position_x = position_x;
     this.position_y = position_y;
-    this.id = id;
     this.intervalIdCollection(() => this.animate(this.IMAGE_PULSE), 1000 / 7);
-    // this.animate(this.IMAGE_PULSE, 7);
     console.log("Coins: " + this.setIntervalIdArray);
   }
 
