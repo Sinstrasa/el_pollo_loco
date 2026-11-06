@@ -49,7 +49,6 @@ const level1 = new Level(
       35,
       80, 
       55,
-      0,
     ),
     new Tabasko(
       "assets/img/6_salsa_bottle/salsa_bottle.png",
@@ -59,7 +58,6 @@ const level1 = new Level(
       35,
       80,
       40,
-      1,
     ),
     new Tabasko(
       "assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png",
@@ -69,7 +67,6 @@ const level1 = new Level(
       35,
       80,
       40,
-      2,
     ),
     new Tabasko(
       "assets/img/6_salsa_bottle/salsa_bottle.png",
@@ -79,7 +76,6 @@ const level1 = new Level(
       35,
       80,
       40,
-      3,
     ),
     new Tabasko(
       "assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png",
@@ -89,7 +85,6 @@ const level1 = new Level(
       35,
       80,
       55,
-      4,
     ),
   ],
   [
