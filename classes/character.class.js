@@ -1,6 +1,7 @@
 class Character extends MovableObject {
   position_y = 175.5;
   world;
+  isLanding = false;
   sumCollected = [0, 0];
   offset = {top: 100, bottom: 110, left: 40, right: 20};
   IMAGES_WALKING = [
@@ -21,9 +22,11 @@ class Character extends MovableObject {
     "assets/img/2_character_pepe/3_jump/J-35.png",
     "assets/img/2_character_pepe/3_jump/J-36.png",
     "assets/img/2_character_pepe/3_jump/J-37.png",
+  ];
+  IMAGES_LANDING = [
     "assets/img/2_character_pepe/3_jump/J-38.png",
     "assets/img/2_character_pepe/3_jump/J-39.png",
-  ];
+  ]
   IMAGES_HURT = [
     "assets/img/2_character_pepe/4_hurt/H-41.png",
     "assets/img/2_character_pepe/4_hurt/H-42.png",
@@ -76,6 +79,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_JUMPING);
     this.loadImages(this.IMAGES_FALLING);
+    this.loadImages(this.IMAGES_LANDING);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEATH);
     this.loadImages(this.IMAGES_IDLE);
@@ -89,15 +93,21 @@ class Character extends MovableObject {
       if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
       } else {
-        if (this.world.keyboard.SPACE && this.fallVelocity >= 0) {
-          this.playAnimation(this.IMAGES_JUMPING);
+        if ((this.world.keyboard.SPACE || this.isAboveGround()) && this.fallVelocity >= 0) {
+          this.playAnimationOnce(this.IMAGES_JUMPING);
         } else {
-          if (this.fallVelocity < 0) {
-            this.playAnimation(this.IMAGES_FALLING);
+          if (this.isAboveGround() && this.fallVelocity < 0) {
+            this.islanding = true
+            this.playAnimationOnce(this.IMAGES_FALLING);
           } else {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-              this.playAnimation(this.IMAGES_WALKING);
-            } else this.playAnimation(this.IMAGES_IDLE);
+            if (!this.isAboveGround() && this.isLanding) {
+              this.playAnimationOnce(this.IMAGES_LANDING);
+              this.isLanding = false;
+            } else {
+                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.playAnimation(this.IMAGES_WALKING);
+            }   else this.playAnimation(this.IMAGES_IDLE); 
+            }
           }
         }
       }

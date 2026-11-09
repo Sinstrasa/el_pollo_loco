@@ -2,6 +2,7 @@ class MovableObject extends DrawableObject {
   mirrored = false;
   fallVelocity = 0;
   acceleration = 0.5;
+  currentAnimation;
   offset = {};
   health = 100;
   lastHit = 0;
@@ -23,11 +24,26 @@ class MovableObject extends DrawableObject {
   }
 
   playAnimation(animation) {
+    if (this.currentAnimation !== animation) {
+      this.currentImage = 0;
+      this.currentAnimation = animation;
+    }
     let index = this.currentImage % animation.length;
     let path = animation[index];
     this.image = this.imageCache[path];
     if (index == animation.length - 1) this.currentImage = 0;
     else this.currentImage++;
+  }
+
+  playAnimationOnce(animation) {
+    if (this.currentAnimation !== animation) {
+      this.currentImage = 0;
+      this.currentAnimation = animation;
+    }
+    let index = Math.min(this.currentImage, animation.length - 1);
+    let path = animation[index];
+    this.image = this.imageCache[path];
+    if(this.currentImage < animation.length - 1) this.currentImage++;
   }
 
   moveLeft(speed) {
@@ -51,15 +67,7 @@ class MovableObject extends DrawableObject {
       this.position_y = 175.5;
     }
   }
-  // applyGravity() {
-  //   setInterval(() => {
-  //     if (this.isAboveGround() || this.fallVelocity > 0) {
-  //       this.position_y -= this.fallVelocity;
-  //       this.fallVelocity -= this.acceleration;
-  //     }
-  //   }, 1000 / 30);
-  // }
-
+  
   isAboveGround() {
     if (this instanceof Tabasko) return true;
     else return this.position_y <= 175;
