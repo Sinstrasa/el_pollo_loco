@@ -6,6 +6,7 @@ class World {
   keyboard;
   camera_x = 0;
   setIntervalIdArray = [];
+  collectedBottle = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -133,7 +134,7 @@ class World {
     this.level.coin.forEach((coin) => {
       if(this.character.isColliding(coin)) {
         this.character.collectCollectable(0, coin.taken);
-        coin.isCollected();
+        coin.disappear();
         coin.taken = true;
         this.level.statusbar[2].setPercentage(2, Math.round((this.character.sumCollected[0] / coin.collectable) * 100));
         coin.stopInterval(coin.setIntervalIdArray[0]);
@@ -142,11 +143,21 @@ class World {
     this.level.tabasko.forEach((bottle) => {
       if(this.character.isColliding(bottle)) {
         this.character.collectCollectable(1, bottle.taken);
-        bottle.isCollected();
+        bottle.disappear();
+        if(!bottle.taken) this.collectedBottle.push(bottle);
         bottle.taken = true;
+        console.log(this.collectedBottle);
         this.level.statusbar[1].setPercentage(1, Math.round((this.character.sumCollected[1] / bottle.collectable) * 100));
       }
     })
+  }
+
+  throwBottle() {
+    const bottle = this.collectedBottle.shift();
+    if(!bottle) return;
+    bottle.throwTabasko();
+    this.character.sumCollected[1]--;
+    this.level.statusbar[1].setPercentage(1, Math.round((this.character.sumCollected[1] / bottle.collectable) * 100));
   }
 
   setWorld() {
@@ -161,5 +172,4 @@ class World {
       bottle.world = this;
     });
   }
-
 }

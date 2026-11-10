@@ -37,6 +37,7 @@ function keyPressed(key) {
     case "Enter":
     case "Shift":
       keyboard.ENTER = true;
+      world.throwBottle();
       break;
     default:
       break;

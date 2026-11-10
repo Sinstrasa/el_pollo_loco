@@ -18,7 +18,7 @@ class Coin extends MovableObject {
     console.log("Coins: " + this.setIntervalIdArray);
   }
 
-  isCollected() {
+  disappear() {
     this.loadImage("");
   }
 }
