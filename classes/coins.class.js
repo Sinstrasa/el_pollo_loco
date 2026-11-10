@@ -17,8 +17,4 @@ class Coin extends MovableObject {
     this.intervalIdCollection(() => this.animate(this.IMAGE_PULSE), 1000 / 7);
     console.log("Coins: " + this.setIntervalIdArray);
   }
-
-  disappear() {
-    this.loadImage("");
-  }
 }

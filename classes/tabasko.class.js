@@ -44,8 +44,4 @@ class Tabasko extends MovableObject {
     this.position_y = this.world.character.position_y + 50;
     this.intervalIdCollection(() => this.moveLeft(7), 1000 / 60);
   }
-
-  disappear() {
-    this.loadImage("");
-  }
 }

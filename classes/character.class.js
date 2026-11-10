@@ -115,7 +115,7 @@ class Character extends MovableObject {
   }
 
   deathAnimation() {
-    this.playAnimation(this.IMAGES_DEATH);
+      this.playAnimationOnce(this.IMAGES_DEATH);
     // this.stopInterval(this.setIntervalIdArray[0]);
     // this.stopInterval(this.setIntervalIdArray[1]);
     // this.stopInterval(this.setIntervalIdArray[2]);

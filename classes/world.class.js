@@ -131,6 +131,11 @@ class World {
   }
 
   checkHitboxCharacterCollectable() {
+    this.checkCoin();
+    this.checkBottle();
+  }
+
+  checkCoin() {
     this.level.coin.forEach((coin) => {
       if(this.character.isColliding(coin)) {
         this.character.collectCollectable(0, coin.taken);
@@ -140,13 +145,15 @@ class World {
         coin.stopInterval(coin.setIntervalIdArray[0]);
       }
     })
+  }
+
+  checkBottle() {
     this.level.tabasko.forEach((bottle) => {
       if(this.character.isColliding(bottle)) {
         this.character.collectCollectable(1, bottle.taken);
         bottle.disappear();
         if(!bottle.taken) this.collectedBottle.push(bottle);
         bottle.taken = true;
-        console.log(this.collectedBottle);
         this.level.statusbar[1].setPercentage(1, Math.round((this.character.sumCollected[1] / bottle.collectable) * 100));
       }
     })

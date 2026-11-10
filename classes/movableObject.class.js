@@ -24,26 +24,30 @@ class MovableObject extends DrawableObject {
   }
 
   playAnimation(animation) {
-    if (this.currentAnimation !== animation) {
-      this.currentImage = 0;
-      this.currentAnimation = animation;
-    }
+    this.checkAnimation(animation);
     let index = this.currentImage % animation.length;
-    let path = animation[index];
-    this.image = this.imageCache[path];
+    this.initialiseImages(animation, index);
     if (index == animation.length - 1) this.currentImage = 0;
     else this.currentImage++;
   }
 
   playAnimationOnce(animation) {
+    this.checkAnimation(animation);
+    let index = Math.min(this.currentImage, animation.length - 1);
+    this.initialiseImages(animation, index);
+    if(this.currentImage < animation.length - 1) this.currentImage++;
+  }
+
+  checkAnimation(animation) {
     if (this.currentAnimation !== animation) {
       this.currentImage = 0;
       this.currentAnimation = animation;
     }
-    let index = Math.min(this.currentImage, animation.length - 1);
+  }
+
+  initialiseImages(animation, index) {
     let path = animation[index];
     this.image = this.imageCache[path];
-    if(this.currentImage < animation.length - 1) this.currentImage++;
   }
 
   moveLeft(speed) {
@@ -116,5 +120,9 @@ class MovableObject extends DrawableObject {
 
   isDead() {
     return this.health == 0;
+  }
+
+  disappear() {
+    this.loadImage("");
   }
 }
