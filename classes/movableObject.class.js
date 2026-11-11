@@ -108,7 +108,9 @@ class MovableObject extends DrawableObject {
 
   hit(damage) {
     this.health -= damage;
-    if(this.health < 0) this.health = 0;
+    if(this.health < 0) {
+      this.health = 0;
+    }
     else this.lastHit = new Date().getTime();
   }
 

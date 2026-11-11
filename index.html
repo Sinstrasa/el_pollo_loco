@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="fonts.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="classes/world.class.js"></script>
     <script src="classes/drawableObject.class.js"></script>
@@ -15,17 +16,47 @@
     <script src="classes/smallChicken.class.js"></script>
     <script src="classes/chicken.class.js"></script>
     <script src="classes/endboss.class.js"></script>
+    <script src="classes/gameWinOver.class.js"></script>
     <script src="classes/cloud.class.js"></script>
     <script src="classes/background.class.js"></script>
     <script src="classes/level.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="scripts/game.js"></script>
     <title>El Pollo Loco</title>
-    <link rel="shortcut icon" href="assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png" type="image/x-icon"/>
   </head>
   <body onload="initialise()">
     <h1>El Pollo Loco</h1>
     <canvas id="game" width="720px" height="480px"></canvas>
+    <article class="buttons_over_canvas">
+      <section class="miscellaneous">
+        <button class="sounds">
+          <img src="assets/buttons/sound_on.svg" alt="Sound Icon">
+        </button>
+      </section>
+      <section class="action_buttons">
+        <div class="mobile_buttons">
+          <button class="left">
+            <img src="assets/buttons/left.png" alt="Left Arrow">
+          </button>
+          <button class="right">
+            <img src="assets/buttons/right.png" alt="Right Arrow">
+          </button>
+        </div>
+        <section class="start_game">
+          <button class="start">Start</button>
+          <button class="retry">Retry</button>
+        </section>
+        <div class="mobile_buttons">
+          <button class="jump">
+            <img src="assets/buttons/jump.png" alt="Up Arrow">
+          </button>
+          <button class="action">
+            <img src="assets/buttons/bottle.svg" alt="Bottle Icon">
+          </button>
+        </div>
+      </section>
+    </article>
     <section>
       <p>W / I / Space / 🠝 - Jump</p>
       <p>A & D / J & L / 🠜 & 🠞 - Move Left & Right</p>
@@ -36,4 +67,10 @@
 
 <!-- 
   https://pixabay.com/photos/cactus-flowers-hills-valley-9085905/
+  https://pixabay.com/illustrations/app-application-arrow-back-button-1646213/
+  https://pixabay.com/illustrations/app-application-arrow-back-button-1646214/
+  https://pixabay.com/illustrations/app-application-arrow-back-button-1646212/
+  https://pixabay.com/vectors/icon-loudspeaker-speaker-horn-1628258/
+  https://pixabay.com/vectors/mute-icon-speaker-loudspeaker-1628277/
+  https://pixabay.com/vectors/champagne-bottle-icon-5591296/
 -->

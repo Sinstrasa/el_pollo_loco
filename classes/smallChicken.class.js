@@ -33,6 +33,6 @@ class SmallChicken extends MovableObject {
       } else {
         this.moveLeft(0.5);
       }
-      }
+    }
   }
 }
