@@ -7,6 +7,22 @@ function initialise() {
   world = new World(canvas, keyboard);
 }
 
+function startGame(id) {
+  world.initialiseWorld();
+  world.overlay.disappear();
+  hideButton(id);
+}
+
+function hideButton(id) {
+  let button = document.getElementById(id);
+  button.style.display = "none";
+}
+
+function showButton(id) {
+  let button = document.getElementById(id);
+  button.style.display = "block";
+}
+
 document.addEventListener("keydown", (event) => keyPressed(event.key));
 document.addEventListener("keyup", (event) => keyReleased(event.key));
 

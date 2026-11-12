@@ -16,7 +16,7 @@
     <script src="classes/smallChicken.class.js"></script>
     <script src="classes/chicken.class.js"></script>
     <script src="classes/endboss.class.js"></script>
-    <script src="classes/gameWinOver.class.js"></script>
+    <script src="classes/overlay.class.js"></script>
     <script src="classes/cloud.class.js"></script>
     <script src="classes/background.class.js"></script>
     <script src="classes/level.class.js"></script>
@@ -44,8 +44,8 @@
           </button>
         </div>
         <section class="start_game">
-          <button class="start">Start</button>
-          <button class="retry">Retry</button>
+          <button class="start" id="startButton" onclick="startGame('startButton')">Start</button>
+          <button class="retry" id="retryButton" onclick="startGame('retryButton')">Retry</button>
         </section>
         <div class="mobile_buttons">
           <button class="jump">

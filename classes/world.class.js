@@ -1,17 +1,30 @@
 class World {
-  character = new Character();
-  level = level1;
   ctx;
   canvas;
   keyboard;
-  camera_x = 0;
-  setIntervalIdArray = [];
-  collectedBottle = [];
+  overlay = new Overlay();
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.loadTitle();
+    this.setOverlay();
+  }
+
+  loadTitle() {
+    this.overlay.image.onload = () => {
+      this.addToMap(this.overlay);
+    }
+  }
+
+  initialiseWorld() {
+    initLevel();
+    this.character = new Character();
+    this.level = level1;
+    this.camera_x = 0;
+    this.setIntervalIdArray = [];
+    this.collectedBottle = [];
     this.createBackground();
     this.draw();
     this.setWorld();
@@ -49,6 +62,7 @@ class World {
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
     this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.overlay);
     let self = this;
     requestAnimationFrame(function () {self.draw();});
   }
@@ -178,5 +192,9 @@ class World {
     this.level.tabasko.forEach((bottle) => {
       bottle.world = this;
     });
+  }
+
+  setOverlay() {
+    this.overlay.world = this;
   }
 }

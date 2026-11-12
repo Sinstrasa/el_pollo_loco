@@ -110,6 +110,7 @@ class MovableObject extends DrawableObject {
     this.health -= damage;
     if(this.health < 0) {
       this.health = 0;
+      this.world.overlay.endscreen();
     }
     else this.lastHit = new Date().getTime();
   }
