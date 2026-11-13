@@ -6,6 +6,5 @@ class Cloud extends MovableObject {
     this.width = 400;
     this.height = 250;
     this.intervalIdCollection(() => this.moveLeft(0.05), 1000 / 60);
-    console.log("Cloud: " + this.setIntervalIdArray);
   }
 }

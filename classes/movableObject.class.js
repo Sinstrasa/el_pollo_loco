@@ -15,6 +15,10 @@ class MovableObject extends DrawableObject {
     this.setIntervalIdArray.push(id);
   }
 
+  stopGame() {
+    for (let index = 1; index <= 9999; index++) this.stopInterval(index);
+  }
+
   stopInterval(id) {
     clearInterval(id);
   }

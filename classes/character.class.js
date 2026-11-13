@@ -71,7 +71,6 @@ class Character extends MovableObject {
     this.intervalIdCollection(() => this.animate(), 1000 / 15);
     this.intervalIdCollection(() => this.moveCharacter(), 1000 / 60);
     this.intervalIdCollection(() => this.applyGravity(), 1000 / 30);
-    console.log("Character: " + this.setIntervalIdArray);
   }
 
   loadSprites() {

@@ -15,6 +15,5 @@ class Coin extends MovableObject {
     this.position_x = position_x;
     this.position_y = position_y;
     this.intervalIdCollection(() => this.animate(this.IMAGE_PULSE), 1000 / 7);
-    console.log("Coins: " + this.setIntervalIdArray);
   }
 }

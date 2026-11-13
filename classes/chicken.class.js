@@ -16,7 +16,6 @@ class Chicken extends MovableObject {
     this.position_x = start;
     this.intervalIdCollection(() => this.animate(this.IMAGES_WALKING), 1000 / 9);
     this.intervalIdCollection(() => this.actions(), 1000 / 60);
-    console.log("Chicken: " + this.setIntervalIdArray);
   }
 
   loadSprites() {

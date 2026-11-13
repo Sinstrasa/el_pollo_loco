@@ -15,7 +15,6 @@ class SmallChicken extends MovableObject {
     this.position_x = start;
     this.position_y = 345;
     this.intervalIdCollection(() => this.animate(this.IMAGES_WALKING), 1000 / 9);
-    console.log("Small Chicken: " + this.setIntervalIdArray);
   }
 
   loadSprites() {

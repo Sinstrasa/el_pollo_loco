@@ -29,7 +29,6 @@ class World {
     this.draw();
     this.setWorld();
     this.intervalIdCollection(() => this.run(), 1000 / 30);
-    console.log("World: " + this.setIntervalIdArray);
   }
 
   intervalIdCollection(func, frame) {
