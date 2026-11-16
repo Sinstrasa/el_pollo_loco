@@ -4,6 +4,7 @@ class Tabasko extends MovableObject {
   collectable = 5;
   taken = false;
   touchEnemy = false;
+  isThrown = false;
   IMAGE_AIR = [
     "assets/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
     "assets/img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
@@ -30,6 +31,7 @@ class Tabasko extends MovableObject {
   }
 
   throwTabasko() {
+    this.isThrown = true;
     this.throwDirection();
     this.fallVelocity = 5;
     this.intervalIdCollection(() => this.applyGravity(), 1000 / 30);

@@ -86,7 +86,7 @@ class World {
       movingObject.position_y,
       movingObject.width,
       movingObject.height);
-    this.showHitbox(movingObject);
+    // this.showHitbox(movingObject);
     this.mirrorImageReverse(movingObject);
   }
 
@@ -178,13 +178,13 @@ class World {
     bottle.throwTabasko();
     this.character.sumCollected[1]--;
     this.level.statusbar[1].setPercentage(1, Math.round((this.character.sumCollected[1] / bottle.collectable) * 100));
-    this.hitEnemy();
+    this.intervalIdCollection(() => this.hitEnemy(), 1000 / 60);
   }
 
   hitEnemy() {
     this.level.tabasko.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
-        if(enemy.isColliding(bottle)) {
+        if(enemy.isColliding(bottle) && bottle.isThrown) {
           if(enemy instanceof Endboss) enemy.hit(34);
           else enemy.hit(100);
           bottle.touchEnemy = true;
