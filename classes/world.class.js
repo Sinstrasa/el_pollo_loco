@@ -70,8 +70,8 @@ class World {
     this.addObjectToMap(this.level.background);
     this.addObjectToMap(this.level.clouds);
     this.addObjectToMap(this.level.coin);
-    this.addObjectToMap(this.level.tabasko);
     this.addObjectToMap(this.level.enemies);
+    this.addObjectToMap(this.level.tabasko);
   }
 
   addObjectToMap(object) {
@@ -86,7 +86,7 @@ class World {
       movingObject.position_y,
       movingObject.width,
       movingObject.height);
-    // this.showHitbox(movingObject);
+    this.showHitbox(movingObject);
     this.mirrorImageReverse(movingObject);
   }
 
@@ -178,6 +178,19 @@ class World {
     bottle.throwTabasko();
     this.character.sumCollected[1]--;
     this.level.statusbar[1].setPercentage(1, Math.round((this.character.sumCollected[1] / bottle.collectable) * 100));
+    this.hitEnemy();
+  }
+
+  hitEnemy() {
+    this.level.tabasko.forEach((bottle) => {
+      this.level.enemies.forEach((enemy) => {
+        if(enemy.isColliding(bottle)) {
+          if(enemy instanceof Endboss) enemy.hit(34);
+          else enemy.hit(100);
+          bottle.touchEnemy = true;
+        }
+      })
+    })
   }
 
   setWorld() {

@@ -65,4 +65,11 @@ class Endboss extends MovableObject {
   bossMoves() {
     if (this.encounter) this.moveLeft(2);
   }
+
+  defeatedEndboss() {
+    if (this.isDead()) {
+      this.playAnimationOnce(this.IMAGES_DEATH);
+      this.stopInterval(this.setIntervalIdArray[1]);
+    } else this.playAnimation(this.IMAGES_HURT);
+  }
 }

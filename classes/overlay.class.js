@@ -17,7 +17,11 @@ class Overlay extends MovableObject {
     this.position_x = 240;
     this.position_y = 180;
     if (this.world.character.health <= 0) this.loadImage(this.IMAGE_OVER);
-    else this.loadImage(this.IMAGE_WIN);
+    else {
+      this.width = 480;
+      this.position_x = 100;
+      this.loadImage(this.IMAGE_WIN);
+    }
     showButton('retryButton');
   }
 }
