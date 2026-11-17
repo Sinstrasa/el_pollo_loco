@@ -45,7 +45,7 @@
         </div>
         <section class="start_game">
           <button class="start" id="startButton" onclick="startGame('startButton')">Start</button>
-          <button class="retry" id="retryButton" onclick="startGame('retryButton')">Retry</button>
+          <button class="retry" id="retryButton" onclick="world.character.stopGame(); startGame('retryButton')">Retry</button>
         </section>
         <div class="mobile_buttons">
           <button class="jump">

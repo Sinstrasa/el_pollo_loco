@@ -98,6 +98,7 @@ class Character extends MovableObject {
   deathAnimation() {
     this.playAnimationOnce(this.IMAGES_DEATH);
     this.stopInterval(this.setIntervalIdArray[1]);
+    this.world.overlay.endscreen();
   }
 
   jumpAnimation() {

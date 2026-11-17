@@ -12,10 +12,7 @@ class Overlay extends MovableObject {
   }
 
   endscreen() {
-    this.width = 240;
-    this.height = 180;
-    this.position_x = 240;
-    this.position_y = 180;
+    this.defaultPosition();
     if (this.world.character.health <= 0) this.loadImage(this.IMAGE_OVER);
     else {
       this.width = 480;
@@ -23,5 +20,12 @@ class Overlay extends MovableObject {
       this.loadImage(this.IMAGE_WIN);
     }
     showButton('retryButton');
+  }
+
+  defaultPosition() {
+    this.width = 240;
+    this.height = 180;
+    this.position_x = 240;
+    this.position_y = 180;
   }
 }

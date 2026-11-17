@@ -130,7 +130,7 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead()) return;
       else {
-        if (this.character.fallVelocity < 0 && this.character.jumpsOnEnemy(enemy)) {
+        if (this.character.fallVelocity < 0 && this.character.jumpsOnEnemy(enemy) && !(enemy instanceof Endboss)) {
          this.character.jump();
         enemy.hit(100);
         } else {
@@ -184,7 +184,7 @@ class World {
   hitEnemy() {
     this.level.tabasko.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
-        if(enemy.isColliding(bottle) && bottle.isThrown) {
+        if(enemy.isColliding(bottle) && bottle.isThrown && !bottle.touchEnemy) {
           if(enemy instanceof Endboss) enemy.hit(34);
           else enemy.hit(100);
           bottle.touchEnemy = true;

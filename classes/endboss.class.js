@@ -5,6 +5,7 @@ class Endboss extends MovableObject {
   height = 450;
   counter = 0;
   encounter = false;
+  deathAnimationStarted = false;
   offset = {top: 60, bottom: 70, left: 30, right: 20};
   IMAGES_WALK = [
     "assets/img/4_enemie_boss_chicken/1_walk/G1.png",
@@ -38,8 +39,7 @@ class Endboss extends MovableObject {
   constructor() {
     super().loadImage("assets/img/4_enemie_boss_chicken/3_attack/G20.png");
     this.loadSprites();
-    this.intervalIdCollection(() => this.bossActivates(), 1000 / 7);
-    this.intervalIdCollection(() => this.bossMoves(), 1000 / 60);
+    this.activateInterval();
   }
 
   loadSprites() {
@@ -47,6 +47,11 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_ALERT);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEATH);
+  }
+
+  activateInterval() {
+    this.intervalIdCollection(() => this.bossActivates(), 1000 / 7);
+    this.intervalIdCollection(() => this.bossMoves(), 1000 / 60);
   }
 
   bossActivates() {
@@ -63,13 +68,48 @@ class Endboss extends MovableObject {
   }
 
   bossMoves() {
-    if (this.encounter) this.moveLeft(2);
+    if (this.isDead()) {
+      this.defeatedEndboss();
+    } else {
+      if (this.isHurt()) {
+        this.hurtEndboss();
+      } else {
+        if (this.encounter) this.moveLeft(2);
+      }
+    }
   }
 
   defeatedEndboss() {
-    if (this.isDead()) {
-      this.playAnimationOnce(this.IMAGES_DEATH);
-      this.stopInterval(this.setIntervalIdArray[1]);
-    } else this.playAnimation(this.IMAGES_HURT);
+    if(this.isDead() && !this.deathAnimationStarted) {
+      this.deathAnimationStarted = true;
+      this.resetInterval();
+      this.counter = 0;
+      this.intervalIdCollection(() => this.deathAnimation(), 1000 / 10);
+    }
+  }
+
+  deathAnimation() {
+    this.playAnimationOnce(this.IMAGES_DEATH);
+    this.counter++;
+    if (this.counter >= this.IMAGES_DEATH.length) {
+      this.world.overlay.endscreen();
+      this.stopInterval(this.setIntervalIdArray[2]);
+    };
+  }
+
+  hurtEndboss() {
+    this.resetInterval();
+    this.setIntervalIdArray = [];
+    this.intervalIdCollection(() => this.playAnimation(this.IMAGES_HURT), 1000 / 7);
+    setTimeout(() => {
+      this.stopInterval(this.setIntervalIdArray[0]);
+      this.setIntervalIdArray.pop();
+      this.activateInterval();
+    }, 1000);
+  }
+
+  resetInterval() {
+    this.stopInterval(this.setIntervalIdArray[0]);
+    this.stopInterval(this.setIntervalIdArray[1]);
   }
 }
