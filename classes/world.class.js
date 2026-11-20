@@ -184,8 +184,11 @@ class World {
   hitEnemy() {
     this.level.tabasko.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
-        if(enemy.isColliding(bottle) && bottle.isThrown && !bottle.touchEnemy) {
-          if(enemy instanceof Endboss) enemy.hit(34);
+        if(enemy.isColliding(bottle) && bottle.isThrown && !bottle.touchEnemy && !enemy.isDead()) {
+          if(enemy instanceof Endboss) {
+            enemy.hit(34);
+            this.level.statusbar[3].setPercentage(3, Math.round((enemy.health / 100) * 100));
+          }
           else enemy.hit(100);
           bottle.touchEnemy = true;
         }

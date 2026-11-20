@@ -55,16 +55,18 @@ class Endboss extends MovableObject {
   }
 
   bossActivates() {
-    if (this.counter <= 10) {
+    if (this.encounter) {
+      if (this.counter <= 10) {
         this.playAnimationOnce(this.IMAGES_ALERT);
         this.counter++;
       } else {
         this.playAnimation(this.IMAGES_WALK);
       }
-      if (this.world.character.position_x >= 2100 && !this.encounter) {
-        this.counter = 0;
-        this.encounter = true;
-      }
+    }
+    if (this.world.character.position_x >= 2100 && !this.encounter) {
+      this.counter = 0;
+      this.encounter = true;
+    }
   }
 
   bossMoves() {
@@ -74,7 +76,7 @@ class Endboss extends MovableObject {
       if (this.isHurt()) {
         this.hurtEndboss();
       } else {
-        if (this.encounter) this.moveLeft(2);
+        if (this.counter >= 10 && this.encounter) this.moveLeft(2);
       }
     }
   }
