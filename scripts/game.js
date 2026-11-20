@@ -8,6 +8,8 @@ let keyboard = new Keyboard();
 function initialise() {
   canvas = document.getElementById("game");
   world = new World(canvas, keyboard);
+  loadFromLocalStorage();
+  renderAudioButton();
 }
 
 function startGame(id) {
@@ -24,8 +26,8 @@ function playAudio() {
       audio.loop = true;
       audio.play();
     }
-    let audioButton = document.getElementById('miscellaneous');
-    audioButton.innerHTML = activeAudioButtonTemplate(); 
+    renderAudioButton();
+    saveToLocalStorage();
   }
 }
 
@@ -33,9 +35,9 @@ function stopAudio() {
   if (gameStarted) {
     audio.pause();
   }
-  let audioButton = document.getElementById('miscellaneous');
-  audioButton.innerHTML = deactiveAudioButtonTemplate();
   audioAllowed = false;
+  renderAudioButton();
+  saveToLocalStorage();
 }
 
 function hideButton(id) {
@@ -46,6 +48,22 @@ function hideButton(id) {
 function showButton(id) {
   let button = document.getElementById(id);
   button.style.display = "block";
+}
+
+function saveToLocalStorage() {
+  localStorage.setItem("audio", audioAllowed);
+}
+
+function loadFromLocalStorage() {
+  const storedAudio = localStorage.getItem("audio");
+  if (storedAudio != null) audioAllowed = storedAudio === "true";
+}
+
+function renderAudioButton() {
+  let audioButton = document.getElementById('miscellaneous');
+  if (audioAllowed) {
+    audioButton.innerHTML = activeAudioButtonTemplate();
+  } else audioButton.innerHTML = deactiveAudioButtonTemplate();
 }
 
 document.addEventListener("keydown", (event) => keyPressed(event.key));
