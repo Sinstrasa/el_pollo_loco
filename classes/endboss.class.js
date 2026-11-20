@@ -3,7 +3,6 @@ class Endboss extends MovableObject {
   position_y = 10;
   width = 350;
   height = 450;
-  counter = 0;
   encounter = false;
   deathAnimationStarted = false;
   offset = {top: 60, bottom: 70, left: 30, right: 20};
@@ -95,8 +94,8 @@ class Endboss extends MovableObject {
     this.counter++;
     if (this.counter >= this.IMAGES_DEATH.length) {
       this.world.overlay.endscreen();
-      this.stopInterval(this.setIntervalIdArray[2]);
-    };
+      this.stopGame();
+    }
   }
 
   hurtEndboss() {

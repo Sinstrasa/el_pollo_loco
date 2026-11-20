@@ -1,5 +1,8 @@
 let canvas;
 let world;
+let gameStarted = false;
+let audio = new Audio("assets/audio/game_theme.mp3");
+let audioAllowed = true;
 let keyboard = new Keyboard();
 
 function initialise() {
@@ -10,7 +13,29 @@ function initialise() {
 function startGame(id) {
   world.initialiseWorld();
   world.overlay.disappear();
+  gameStarted = true;
+  playAudio();
   hideButton(id);
+}
+
+function playAudio() {
+  if (audioAllowed) {
+      if (gameStarted) {
+      audio.loop = true;
+      audio.play();
+    }
+    let audioButton = document.getElementById('miscellaneous');
+    audioButton.innerHTML = activeAudioButtonTemplate(); 
+  }
+}
+
+function stopAudio() {
+  if (gameStarted) {
+    audio.pause();
+  }
+  let audioButton = document.getElementById('miscellaneous');
+  audioButton.innerHTML = deactiveAudioButtonTemplate();
+  audioAllowed = false;
 }
 
 function hideButton(id) {

@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject {
   lastHit = 0;
   sumCollected;
   id;
+  counter = 0;
   setIntervalIdArray = [];
 
   intervalIdCollection(func, frame) {
