@@ -1,0 +1,43 @@
+body {
+  display: block;
+  padding: 48px;
+}
+
+p {
+  color: black;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.content_space {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 48px;
+}
+
+h2 {
+  text-decoration: underline;
+  color: black;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 24px;
+}
+
+a {
+  color: black;
+}

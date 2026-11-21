@@ -17,6 +17,11 @@ body {
   background-size: cover;
 }
 
+a {
+  font-size: 24px;
+  text-decoration: none;
+}
+
 .gamewrapper {
   position: relative;
 }
