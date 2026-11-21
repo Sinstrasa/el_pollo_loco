@@ -9,3 +9,15 @@ function deactiveAudioButtonTemplate() {
               <img src="assets/buttons/sound_off.svg" alt="Sound Icon">
             </button>`;
 }
+
+function activateFullscreenButtonTemplate() {
+  return `<button class="fullscreen" onclick="checkFullscreen()">
+            <img src="assets/buttons/fullscreen.png" alt="Fullscreen Icon">
+          </button>`
+}
+
+function deactivateFullscreenButtonTemplate() {
+  return `<button class="fullscreen" onclick="checkFullscreen()">
+            <img src="assets/buttons/window.png" alt="Window Icon">
+          </button>`
+}

@@ -28,30 +28,35 @@
   </head>
   <body onload="initialise()">
     <h1>El Pollo Loco</h1>
-    <canvas id="game" width="720px" height="480px"></canvas>
-    <article class="buttons_over_canvas">
-      <section class="miscellaneous" id="miscellaneous"></section>
-      <section class="action_buttons">
-        <div class="mobile_buttons">
-          <button class="left">
-            <img src="assets/buttons/left.png" alt="Left Arrow">
-          </button>
-          <button class="right">
-            <img src="assets/buttons/right.png" alt="Right Arrow">
-          </button>
-        </div>
-        <section class="start_game">
-          <button class="start" id="startButton" onclick="startGame('startButton')">Start</button>
-          <button class="retry" id="retryButton" onclick="world.character.stopGame(); startGame('retryButton')">Retry</button>
+    <article class="gamewrapper" id="gamewrapper">
+      <canvas id="game" width="720px" height="480px"></canvas>
+      <section class="buttons_over_canvas">
+        <section class="miscellaneous" id="miscellaneous">
+          <div id="sound"></div>
+          <div id="fullscreen"></div>
         </section>
-        <div class="mobile_buttons">
-          <button class="jump">
-            <img src="assets/buttons/jump.png" alt="Up Arrow">
-          </button>
-          <button class="action">
-            <img src="assets/buttons/bottle.svg" alt="Bottle Icon">
-          </button>
-        </div>
+        <section class="action_buttons">
+          <div class="mobile_buttons">
+            <button class="left">
+              <img src="assets/buttons/left.png" alt="Left Arrow">
+            </button>
+            <button class="right">
+              <img src="assets/buttons/right.png" alt="Right Arrow">
+            </button>
+          </div>
+          <section class="start_game">
+            <button class="start" id="startButton" onclick="startGame('startButton')">Start</button>
+            <button class="retry" id="retryButton" onclick="world.character.stopGame(); startGame('retryButton')">Retry</button>
+          </section>
+          <div class="mobile_buttons">
+            <button class="jump">
+              <img src="assets/buttons/jump.png" alt="Up Arrow">
+            </button>
+            <button class="action">
+              <img src="assets/buttons/bottle.svg" alt="Bottle Icon">
+            </button>
+          </div>
+        </section>
       </section>
     </article>
     <section>

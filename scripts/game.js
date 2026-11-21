@@ -3,6 +3,7 @@ let world;
 let gameStarted = false;
 let audio = new Audio("assets/audio/game_theme.mp3");
 let audioAllowed = true;
+let windowScreen = true;
 let keyboard = new Keyboard();
 
 function initialise() {
@@ -10,6 +11,7 @@ function initialise() {
   world = new World(canvas, keyboard);
   loadFromLocalStorage();
   renderAudioButton();
+  renderFullscreenButton();
 }
 
 function startGame(id) {
@@ -60,10 +62,48 @@ function loadFromLocalStorage() {
 }
 
 function renderAudioButton() {
-  let audioButton = document.getElementById('miscellaneous');
+  let audioButton = document.getElementById('sound');
   if (audioAllowed) {
     audioButton.innerHTML = activeAudioButtonTemplate();
   } else audioButton.innerHTML = deactiveAudioButtonTemplate();
+}
+
+function renderFullscreenButton() {
+  let fullscreenButton = document.getElementById('fullscreen');
+  if(windowScreen) fullscreenButton.innerHTML = activateFullscreenButtonTemplate();
+  else fullscreenButton.innerHTML = deactivateFullscreenButtonTemplate();
+}
+
+function checkFullscreen() {
+  if (windowScreen) {
+    openFullscreen();
+    windowScreen = false;
+  } else {
+    closeFullscreen();
+    windowScreen = true;
+  }
+  renderFullscreenButton();
+}
+
+function openFullscreen() {
+  let screen = document.getElementById('gamewrapper');
+  if (screen.requestFullscreen) {
+    screen.requestFullscreen();
+  } else if (screen.webkitRequestFullscreen) { /* Safari */
+    screen.webkitRequestFullscreen();
+  } else if (screen.msRequestFullscreen) { /* IE11 */
+    screen.msRequestFullscreen();
+  }
+}
+
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) { /* Safari */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { /* IE11 */
+    document.msExitFullscreen();
+  }
 }
 
 document.addEventListener("keydown", (event) => keyPressed(event.key));
