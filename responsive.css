@@ -1,0 +1,57 @@
+@media (orientation: portrait) {
+  body {
+    display: flex;
+    height: auto;
+    rotate: 90deg;
+    overflow: hidden;
+    content: url(backgrounds/phone.svg);
+    background-image: none;
+    background-color: black;
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  .instruction,
+  h1 {
+    display: none;
+  }
+  .left,
+  .right,
+  .jump,
+  .action {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 0px;
+    border-radius: 50%;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  canvas {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-height: 480px) {
+  canvas {
+    height: 100dvh;
+  }
+}
+
+@media only screen and (max-width: 720px), only screen and (max-height: 480px) {
+  .buttons_over_canvas {
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+  .gamewrapper {
+    overflow: hidden;
+  }
+  .miscellaneous {
+    gap: 0px;
+  }
+  .fullscreen {
+    display: none;
+  }
+}

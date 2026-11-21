@@ -17,6 +17,10 @@ body {
   background-size: cover;
 }
 
+.gamewrapper {
+  position: relative;
+}
+
 .gamewrapper:fullscreen {
   display: flex;
   justify-content: center;
@@ -28,10 +32,6 @@ body {
   width: 100dvw;
   height: auto;
   aspect-ratio: 4 / 3;
-}
-
-.gamewrapper:fullscreen > section {
-  top: 135px;
 }
 
 h1 {
@@ -76,7 +76,7 @@ button:hover {
   flex-direction: column;
   justify-content: space-between;
   position: absolute;
-  top: 240px;
+  top: 0px;
   width: 720px;
   height: 480px;
   padding: 16px;
@@ -87,10 +87,12 @@ button:hover {
   flex-direction: row;
   justify-content: end;
   align-items: end;
+  gap: 24px;
 }
 
 .sounds,
 .fullscreen {
+  display: block;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -112,10 +114,7 @@ button:hover {
 .right,
 .jump,
 .action {
-  width: 50px;
-  height: 50px;
-  border: 0px;
-  border-radius: 50%;
+  display: none;
 }
 
 .mobile_buttons img {
@@ -132,9 +131,5 @@ button:hover {
 }
 
 .retry {
-  display: none;
-}
-
-.mobile {
   display: none;
 }
