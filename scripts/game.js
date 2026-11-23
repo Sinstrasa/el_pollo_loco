@@ -12,8 +12,6 @@ function initialise() {
   loadFromLocalStorage();
   renderAudioButton();
   renderFullscreenButton();
-  buttonPressed();
-  buttonReleased();
 }
 
 function startGame(id) {
@@ -22,6 +20,8 @@ function startGame(id) {
   gameStarted = true;
   playAudio();
   hideButton(id);
+  buttonPressed();
+  buttonReleased();
 }
 
 function playAudio() {

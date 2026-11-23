@@ -15,6 +15,10 @@
   h1 {
     display: none;
   }
+  .buttons_over_canvas {
+    width: 100dvw;
+    padding: 16px 64px;
+  }
   .left,
   .right,
   .jump,
@@ -44,12 +48,10 @@
 
 @media only screen and (max-width: 720px), only screen and (max-height: 480px) {
   .buttons_over_canvas {
+    padding: 16px 24px;
     top: 0px;
-    width: 100%;
+    width: 100dvw;
     height: 100%;
-  }
-  .gamewrapper {
-    overflow: hidden;
   }
   .miscellaneous {
     gap: 0px;

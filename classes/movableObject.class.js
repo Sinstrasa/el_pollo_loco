@@ -123,6 +123,12 @@ class MovableObject extends DrawableObject {
     return timePassed < 1;
   }
 
+  isVulnerable() {
+    let timePassed = new Date().getTime() - this.lastHit;
+    timePassed = timePassed / 1000;
+    return timePassed > 1;
+  }
+
   isDead() {
     return this.health == 0;
   }
