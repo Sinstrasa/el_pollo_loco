@@ -75,7 +75,7 @@ class Endboss extends MovableObject {
       if (this.isHurt()) {
         this.hurtEndboss();
       } else {
-        if (this.counter >= 10 && this.encounter) this.moveLeft(2);
+        if (this.counter >= 10 && this.encounter) this.moveLeft(3.5);
       }
     }
   }

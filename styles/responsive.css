@@ -4,7 +4,7 @@
     height: auto;
     rotate: 90deg;
     overflow: hidden;
-    content: url(backgrounds/phone.svg);
+    content: url(../backgrounds/phone.svg);
     background-image: none;
     background-color: black;
   }

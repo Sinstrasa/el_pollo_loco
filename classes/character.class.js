@@ -153,14 +153,14 @@ class Character extends MovableObject {
     }
     if (this.world.keyboard.SPACE) {
       if(!this.isAboveGround()) {
-        this.jump();
+        this.jump(12);
       }
     }
     this.world.camera_x = -this.position_x + 100;
   }
 
-  jump() {
-    this.fallVelocity = 15;
+  jump(gravity) {
+    this.fallVelocity = gravity;
   }
 
   collectCollectable(index, condition) {

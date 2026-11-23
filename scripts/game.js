@@ -188,15 +188,15 @@ function buttonPressed() {
     event.preventDefault();
     keyboard.LEFT = true;
   });
-document.getElementById("buttonRight").addEventListener("touchstart", (event) => {
+  document.getElementById("buttonRight").addEventListener("touchstart", (event) => {
     event.preventDefault();
     keyboard.RIGHT = true;
   });
-document.getElementById("buttonJump").addEventListener("touchstart", (event) => {
+  document.getElementById("buttonJump").addEventListener("touchstart", (event) => {
     event.preventDefault();
     keyboard.SPACE = true;
   });
-document.getElementById("buttonAction").addEventListener("touchstart", (event) => {
+  document.getElementById("buttonAction").addEventListener("touchstart", (event) => {
     event.preventDefault();
     keyboard.ENTER = true;
     world.throwBottle();
@@ -204,16 +204,16 @@ document.getElementById("buttonAction").addEventListener("touchstart", (event) =
 }
 
 function buttonReleased() {
-  document.getElementById("buttonLeft").addEventListener("touchend", (event) => {
+  document.getElementById("buttonLeft").addEventListener("touchend", () => {
   keyboard.LEFT = false;
   });
-document.getElementById("buttonRight").addEventListener("touchend", (event) => {
+  document.getElementById("buttonRight").addEventListener("touchend", () => {
   keyboard.RIGHT = false;
   });
-document.getElementById("buttonJump").addEventListener("touchend", (event) => {
+  document.getElementById("buttonJump").addEventListener("touchend", () => {
   keyboard.SPACE = false;
   });
-document.getElementById("buttonAction").addEventListener("touchend", (event) => {
+  document.getElementById("buttonAction").addEventListener("touchend", () => {
     keyboard.ENTER = false;
   });
 }

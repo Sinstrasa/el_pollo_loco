@@ -131,7 +131,7 @@ class World {
       if (enemy.isDead()) return;
       else {
         if (this.character.fallVelocity < 0 && this.character.jumpsOnEnemy(enemy) && !(enemy instanceof Endboss)) {
-         this.character.jump();
+         this.character.jump(5);
         enemy.hit(100);
         } else {
           if(this.character.isColliding(enemy)) {
