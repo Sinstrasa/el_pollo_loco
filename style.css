@@ -37,7 +37,7 @@ a {
 .gamewrapper:fullscreen canvas,
 .gamewrapper:fullscreen > section {
   width: 100dvw;
-  height: auto;
+  height: 100dvh;
   aspect-ratio: 4 / 3;
 }
 
