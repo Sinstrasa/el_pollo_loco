@@ -156,7 +156,7 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * checks it the object has been hit
+   * checks if the object has been hit
    */
   isHurt() {
     let timePassed = new Date().getTime() - this.lastHit;

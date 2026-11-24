@@ -4,6 +4,7 @@ class Endboss extends MovableObject {
   width = 350;
   height = 450;
   encounter = false;
+  direction = true;
   deathAnimationStarted = false;
   offset = {top: 60, bottom: 70, left: 30, right: 20};
   IMAGES_WALK = [
@@ -74,7 +75,7 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_WALK);
       }
     }
-    if (this.world.character.position_x >= 2100 && !this.encounter) {
+    if (this.world.character.position_x >= 2150 && !this.encounter) {
       this.counter = 0;
       this.encounter = true;
     }
@@ -90,7 +91,10 @@ class Endboss extends MovableObject {
       if (this.isHurt()) {
         this.hurtEndboss();
       } else {
-        if (this.counter >= 10 && this.encounter) this.moveLeft(3.5);
+        if (this.counter >= 10 && this.encounter) {
+          this.checkDirection();
+          this.moveDirection();
+        } 
       }
     }
   }
@@ -131,6 +135,22 @@ class Endboss extends MovableObject {
       this.setIntervalIdArray.pop();
       this.activateInterval();
     }, 1000);
+  }
+
+  /**
+   * checks if the endboss has reached specific borders
+   */
+  checkDirection() {
+    if (this.position_x >= 2400) this.direction = true;
+    if (this.position_x <= -900) this.direction = false;
+  }
+
+  /**
+   * lets the endboss patroll
+   */
+  moveDirection() {
+    if(this.direction) this.moveLeft(3.5);
+    else this.moveRight(3.5);
   }
 
   /**

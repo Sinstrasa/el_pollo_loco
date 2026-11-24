@@ -1,7 +1,8 @@
 class SmallChicken extends MovableObject {
   width = 75;
   height = 75;
-  offset = {top: 5, bottom: 10, left: 15, right: 7};
+  offset = { top: 5, bottom: 10, left: 15, right: 7 };
+  direction = true;
   IMAGES_WALKING = [
     "assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
     "assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
@@ -13,11 +14,16 @@ class SmallChicken extends MovableObject {
    * loads all relevant functions at the start
    */
   constructor(start) {
-    super().loadImage("assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
+    super().loadImage(
+      "assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
+    );
     this.loadSprites();
     this.position_x = start;
     this.position_y = 345;
-    this.intervalIdCollection(() => this.animate(this.IMAGES_WALKING), 1000 / 9);
+    this.intervalIdCollection(
+      () => this.animate(this.IMAGES_WALKING),
+      1000 / 9,
+    );
   }
 
   /**
@@ -33,14 +39,23 @@ class SmallChicken extends MovableObject {
    */
   actions() {
     if (this.isDead()) {
-        this.loadImage(this.IMAGES_DEATH);
-        this.stopInterval(this.setIntervalIdArray[0]);
-      } else {
-        if (this.world.character.position_x > this.position_x - 25) {
-        this.moveRight(0.5);
-      } else {
-        this.moveLeft(0.5);
-      }
+      this.loadImage(this.IMAGES_DEATH);
+      this.stopInterval(this.setIntervalIdArray[0]);
+    } else {
+      if(this.position_x >= this.world.character.position_x + 100)
+        this.direction = true;
+      if(this.position_x <= this.world.character.position_x - 50)
+        this.direction = false;
+      this.moveSmallChicken();
     }
+  }
+
+  /**
+   * changes direction of the small chicken depending on where the
+   * character is standing
+   */
+  moveSmallChicken() {
+    if(this.direction) this.moveLeft(0.5);
+    else this.moveRight(0.5);
   }
 }

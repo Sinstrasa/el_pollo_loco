@@ -2,6 +2,7 @@ class World {
   ctx;
   canvas;
   keyboard;
+  lastThrown = 0;
   overlay = new Overlay();
 
   /**
@@ -224,12 +225,19 @@ class World {
    * checks if player has enough flasks and send them forward
    */
   throwBottle() {
+    if(this.collectedBottle.length == 0 || this.cooldown()) return;
     const bottle = this.collectedBottle.shift();
-    if(!bottle) return;
     bottle.throwTabasko();
     this.character.sumCollected[1]--;
     this.level.statusbar[1].setPercentage(1, Math.round((this.character.sumCollected[1] / bottle.collectable) * 100));
     this.intervalIdCollection(() => this.hitEnemy(), 1000 / 60);
+    this.lastThrown = new Date().getTime();
+  }
+
+  cooldown() {
+    let timePassed = new Date().getTime() - this.lastThrown;
+    timePassed = timePassed / 1000;
+    return timePassed < 1;
   }
 
   /**
