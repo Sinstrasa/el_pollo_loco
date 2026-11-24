@@ -9,6 +9,9 @@ class Coin extends MovableObject {
     "assets/img/8_coin/coin_1.png",
   ];
 
+  /**
+   * loads all relevant functions at the start
+   */
   constructor(position_x, position_y) {
     super().loadImage("assets/img/8_coin/coin_1.png");
     this.loadImages(this.IMAGE_PULSE);

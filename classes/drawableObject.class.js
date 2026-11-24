@@ -8,11 +8,17 @@ class DrawableObject {
   currentImage = 0;
   collectable;
 
+  /**
+   * loads one sent image
+   */
   loadImage(path) {
     this.image = new Image();
     this.image.src = path;
   }
 
+  /**
+   * loads multiple images and stores them
+   */
   loadImages(array) {
     array.forEach((path) => {
       let img = new Image();
@@ -21,6 +27,9 @@ class DrawableObject {
     });
   }
 
+  /**
+   * loads image of an object to the fitting location
+   */
   draw(ctx) {
     ctx.drawImage(
       this.image,

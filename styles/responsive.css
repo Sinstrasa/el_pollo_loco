@@ -2,22 +2,35 @@
   body {
     display: flex;
     height: auto;
-    rotate: 90deg;
     overflow: hidden;
-    content: url(../backgrounds/phone.svg);
     background-image: none;
     background-color: black;
+  }
+  .gamewrapper {
+    display: none;
+  }
+  .portrait {
+    display: block;
+  }
+  .portrait > img {
+    rotate: 90deg;
+  }
+  .imprint {
+    display: none;
   }
 }
 
 @media screen and (max-width: 1439px) {
+  body {
+    gap: 64px;
+  }
   .instruction,
   h1 {
     display: none;
   }
   .buttons_over_canvas {
     width: 100dvw;
-    padding: 16px 64px;
+    padding: 16px 32px;
   }
   .left,
   .right,
@@ -29,14 +42,24 @@
     border: 0px;
     border-radius: 50%;
   }
-  .imprint {
-    display: none;
-}
 }
 
 @media only screen and (max-width: 720px) {
   canvas {
     width: 100%;
+  }
+}
+
+@media only screen and (max-height: 600px) {
+  .miscellaneous {
+    justify-content: space-between;
+  }
+  .imprint {
+    display: none;
+  }
+  .mobile_imprint {
+    display: block;
+    font-size: 16px;
   }
 }
 
@@ -48,15 +71,22 @@
 
 @media only screen and (max-width: 720px), only screen and (max-height: 480px) {
   .buttons_over_canvas {
-    padding: 16px 24px;
+    padding: 16px;
     top: 0px;
     width: 100dvw;
     height: 100%;
   }
   .miscellaneous {
+    justify-content: end;
+    gap: 16px;
+  }
+  .small_options {
     gap: 0px;
   }
   .fullscreen {
+    display: none;
+  }
+  .imprint {
     display: none;
   }
 }

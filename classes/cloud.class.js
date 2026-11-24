@@ -1,4 +1,7 @@
 class Cloud extends MovableObject {
+  /**
+   * loads all relevant functions at the start
+   */
   constructor(asset, start) {
     super().loadImage(asset);
     this.position_y = Math.random() * 20;

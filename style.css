@@ -93,7 +93,17 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: end;
-  align-items: end;
+}
+
+.mobile_imprint {
+  display: none;
+}
+
+.small_options {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
   gap: 24px;
 }
 
@@ -143,5 +153,9 @@ button:hover {
 }
 
 .retry {
+  display: none;
+}
+
+.portrait {
   display: none;
 }

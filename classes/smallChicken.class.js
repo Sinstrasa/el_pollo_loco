@@ -9,6 +9,9 @@ class SmallChicken extends MovableObject {
   ];
   IMAGES_DEATH = ["assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png"];
 
+  /**
+   * loads all relevant functions at the start
+   */
   constructor(start) {
     super().loadImage("assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
     this.loadSprites();
@@ -17,11 +20,17 @@ class SmallChicken extends MovableObject {
     this.intervalIdCollection(() => this.animate(this.IMAGES_WALKING), 1000 / 9);
   }
 
+  /**
+   * loads all relevant images and stores them
+   */
   loadSprites() {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_DEATH);
   }
 
+  /**
+   * loads images fitting to the corresponding situation and moves them
+   */
   actions() {
     if (this.isDead()) {
         this.loadImage(this.IMAGES_DEATH);

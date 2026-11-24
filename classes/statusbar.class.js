@@ -35,6 +35,9 @@ class Statusbar extends DrawableObject {
     "assets/img/7_statusbars/2_statusbar_endboss/orange/orange100.png",
   ];
 
+  /**
+   * loads all relevant functions at the start
+   */
   constructor(asset, index, percentage, position_x, position_y) {
     super().loadImage(asset);
     this.loadSprites();
@@ -43,6 +46,9 @@ class Statusbar extends DrawableObject {
     this.setPercentage(index, percentage);
   }
 
+  /**
+   * loads all relevant images and stores them
+   */
   loadSprites() {
     this.loadImages(this.IMAGES_HEALTH);
     this.loadImages(this.IMAGES_TABASKO);
@@ -50,12 +56,18 @@ class Statusbar extends DrawableObject {
     this.loadImages(this.IMAGES_ENDBOSS);
   }
 
+  /**
+   * displays the current situation of the statusbar
+   */
   setPercentage(index, percentage) {
     this.percentage = percentage;
     let path = this.indexToAsset(index)[this.resolveImageIndex()];
     this.image = this.imageCache[path];
   }
 
+  /**
+   * checks the sent index for the right statusbar
+   */
   indexToAsset(index) {
     switch (index) {
       case 3:
@@ -69,6 +81,9 @@ class Statusbar extends DrawableObject {
     }
   }
 
+  /**
+   * calculates the percentage to show the right asset for the statusbar
+   */
   resolveImageIndex() {
     return Math.floor(this.percentage / 20);
   }

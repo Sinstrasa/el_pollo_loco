@@ -21,6 +21,9 @@ class Tabasko extends MovableObject {
     "",
   ];
 
+  /**
+   * loads all relevant functions at the start
+   */
   constructor(asset, position_x, position_y, top, bottom, left, right) {
     super().loadImage(asset);
     this.loadImages(this.IMAGE_AIR);
@@ -30,6 +33,9 @@ class Tabasko extends MovableObject {
     this.offset = {top: top, bottom: bottom, left: left, right: right};
   }
 
+  /**
+   * moves the flask up and down and runs the animation in an interval
+   */
   throwTabasko() {
     this.isThrown = true;
     this.throwDirection();
@@ -39,6 +45,9 @@ class Tabasko extends MovableObject {
     
   }
 
+  /**
+   * throws the flask depending on the characters point of view
+   */
   throwDirection() {
     if (!this.world.character.mirrored) {
       this.throwRight();
@@ -47,6 +56,9 @@ class Tabasko extends MovableObject {
     }
   }
 
+  /**
+   * sends the flask either forward or backward
+   */
   throwRight() {
     this.position_x = this.world.character.position_x + 100;
     this.position_y = this.world.character.position_y + 50;
@@ -59,6 +71,9 @@ class Tabasko extends MovableObject {
     this.intervalIdCollection(() => this.moveLeft(7), 1000 / 60);
   }
 
+  /**
+   * plays an animation once thrown and hitting an enemy
+   */
   throwAnimation() {
     if (!this.touchEnemy) this.playAnimation(this.IMAGE_AIR);
     else this.playAnimationOnce(this.IMAGES_SPLASH);

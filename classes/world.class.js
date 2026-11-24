@@ -4,6 +4,9 @@ class World {
   keyboard;
   overlay = new Overlay();
 
+  /**
+   * loads all relevant functions at the beginning
+   */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -12,12 +15,18 @@ class World {
     this.setOverlay();
   }
 
+  /**
+   * loads the titlescreen
+   */
   loadTitle() {
     this.overlay.image.onload = () => {
       this.addToMap(this.overlay);
     }
   }
 
+  /**
+   * registers all assets into the game
+   */
   initialiseWorld() {
     initLevel();
     this.character = new Character();
@@ -31,11 +40,17 @@ class World {
     this.intervalIdCollection(() => this.run(), 1000 / 30);
   }
 
+  /**
+   * runs an interval with the sent function in a sent speed and saves it
+   */
   intervalIdCollection(func, frame) {
     let id = setInterval(func, frame);
     this.setIntervalIdArray.push(id);
   }
 
+  /**
+   * loads the background
+   */
   createBackground() {
     for (let index = 0; index < 4; index++) {
       if (index % 2 == 0) {
@@ -52,6 +67,9 @@ class World {
     }
   }
 
+  /**
+   * loads all assets into the game
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -66,6 +84,9 @@ class World {
     requestAnimationFrame(function () {self.draw();});
   }
 
+  /**
+   * loads all objects, stored in an array for the fitting class
+   */
   addLevelObjects() {
     this.addObjectToMap(this.level.background);
     this.addObjectToMap(this.level.clouds);
@@ -78,6 +99,9 @@ class World {
     object.forEach((o) => {this.addToMap(o);});
   }
 
+  /**
+   * places all assets into the canvas
+   */
   addToMap(movingObject) {
     this.mirrorImage(movingObject);
     this.ctx.drawImage(
@@ -90,6 +114,9 @@ class World {
     this.mirrorImageReverse(movingObject);
   }
 
+  /**
+   * mirrors asset
+   */
   mirrorImage(movingObject){
     if (movingObject.mirrored) {
       this.ctx.save();
@@ -99,6 +126,9 @@ class World {
     }
   }
 
+  /**
+   * restores the mirroring
+   */
   mirrorImageReverse(movingObject) {
     if (movingObject.mirrored) {
       this.ctx.restore();
@@ -106,6 +136,9 @@ class World {
     }
   }
 
+  /**
+   * draws an outline for objects
+   */
   showHitbox(movingObject) {
     if(movingObject instanceof Character || movingObject instanceof Chicken || movingObject instanceof SmallChicken || movingObject instanceof Coin || movingObject instanceof Tabasko || movingObject instanceof Endboss) {
     this.ctx.beginPath();
@@ -121,11 +154,17 @@ class World {
     }
   }
 
+  /**
+   * runs functions for checking hitbox between character & other objects
+   */
   run() {
     this.checkHitboxCharacterEnemy();
     this.checkHitboxCharacterCollectable();
   }
 
+  /**
+   * checks if character jumps on enemy or is getting hit by enemy
+   */
   checkHitboxCharacterEnemy() {
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead()) return;
@@ -143,11 +182,17 @@ class World {
     });
   }
 
+  /**
+   * runs functions to check if character hits collectable items
+   */
   checkHitboxCharacterCollectable() {
     this.checkCoin();
     this.checkBottle();
   }
 
+  /**
+   * checks if character collects a coin and sums up the amount
+   */
   checkCoin() {
     this.level.coin.forEach((coin) => {
       if(this.character.isColliding(coin)) {
@@ -160,6 +205,9 @@ class World {
     })
   }
 
+  /**
+   * checks if character collects a flask and sums up the amount
+   */
   checkBottle() {
     this.level.tabasko.forEach((bottle) => {
       if(this.character.isColliding(bottle)) {
@@ -172,6 +220,9 @@ class World {
     })
   }
 
+  /**
+   * checks if player has enough flasks and send them forward
+   */
   throwBottle() {
     const bottle = this.collectedBottle.shift();
     if(!bottle) return;
@@ -181,6 +232,9 @@ class World {
     this.intervalIdCollection(() => this.hitEnemy(), 1000 / 60);
   }
 
+  /**
+   * checks if enemy touches the hitbox of a thrown flask
+   */
   hitEnemy() {
     this.level.tabasko.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
@@ -196,6 +250,9 @@ class World {
     })
   }
 
+  /**
+   * initialises specific objects and its functions to the world to use
+   */
   setWorld() {
     this.character.world = this;
     this.level.enemies.forEach((enemy) => {

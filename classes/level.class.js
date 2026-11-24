@@ -7,6 +7,9 @@ class Level {
   statusbar;
   level_end_x = 2249;
 
+  /**
+   * loads all objects from level 1
+   */
   constructor(enemy, statusbars, cloud, coins, tabasko, background) {
     this.enemies = enemy;
     this.statusbar = statusbars;

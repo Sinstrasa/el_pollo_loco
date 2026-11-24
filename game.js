@@ -6,6 +6,9 @@ let audioAllowed = true;
 let windowScreen = true;
 let keyboard = new Keyboard();
 
+/**
+ * loads all relevant functions
+ */
 function initialise() {
   canvas = document.getElementById("game");
   world = new World(canvas, keyboard);
@@ -14,6 +17,9 @@ function initialise() {
   renderFullscreenButton();
 }
 
+/**
+ * start the game when pressed by the start and reset button
+ */
 function startGame(id) {
   world.initialiseWorld();
   world.overlay.disappear();
@@ -24,6 +30,9 @@ function startGame(id) {
   buttonReleased();
 }
 
+/**
+ * plays and pauses the audio when the game starts
+ */
 function playAudio() {
   if (audioAllowed) {
     if (gameStarted) {
@@ -44,6 +53,9 @@ function stopAudio() {
   saveToLocalStorage();
 }
 
+/**
+ * shows and hides all buttons with the sent id
+ */
 function hideButton(id) {
   let button = document.getElementById(id);
   button.style.display = "none";
@@ -54,6 +66,9 @@ function showButton(id) {
   button.style.display = "block";
 }
 
+/**
+ * saves and loads the status of the audio
+ */
 function saveToLocalStorage() {
   localStorage.setItem("audio", audioAllowed);
 }
@@ -63,6 +78,9 @@ function loadFromLocalStorage() {
   if (storedAudio != null) audioAllowed = storedAudio === "true";
 }
 
+/**
+ * loads a template of a button
+ */
 function renderAudioButton() {
   let audioButton = document.getElementById("sound");
   if (audioAllowed) {
@@ -77,6 +95,9 @@ function renderFullscreenButton() {
   else fullscreenButton.innerHTML = deactivateFullscreenButtonTemplate();
 }
 
+/**
+ * registers if played on fullscreen
+ */
 function checkFullscreen() {
   if (windowScreen) {
     openFullscreen();
@@ -88,6 +109,9 @@ function checkFullscreen() {
   renderFullscreenButton();
 }
 
+/**
+ * switches between fullscreen and windowscreen
+ */
 function openFullscreen() {
   let screen = document.getElementById("gamewrapper");
   if (screen.requestFullscreen) {
@@ -113,6 +137,9 @@ function closeFullscreen() {
   }
 }
 
+/**
+ * eventlistener to register the pressed keys on the keyboard
+ */
 document.addEventListener("keydown", (event) => keyPressed(event.key));
 document.addEventListener("keyup", (event) => keyReleased(event.key));
 
@@ -183,6 +210,9 @@ function keyReleased(key) {
   }
 }
 
+/**
+ * eventlistener to register pressed buttons for mobile version
+ */
 function buttonPressed() {
   document.getElementById("buttonLeft").addEventListener("touchstart", (event) => {
     event.preventDefault();

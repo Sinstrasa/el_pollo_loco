@@ -35,12 +35,18 @@ class Endboss extends MovableObject {
     "assets/img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
+  /**
+   * loads all relevant functions at the start
+   */
   constructor() {
     super().loadImage("assets/img/4_enemie_boss_chicken/3_attack/G20.png");
     this.loadSprites();
     this.activateInterval();
   }
 
+  /**
+   * loads all relevant images and stores them
+   */
   loadSprites() {
     this.loadImages(this.IMAGES_WALK);
     this.loadImages(this.IMAGES_ALERT);
@@ -48,11 +54,17 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEATH);
   }
 
+  /**
+   * runs all necessary functions as intervals
+   */
   activateInterval() {
     this.intervalIdCollection(() => this.bossActivates(), 1000 / 7);
     this.intervalIdCollection(() => this.bossMoves(), 1000 / 60);
   }
 
+  /**
+   * plays the alert animation and then the moving animation
+   */
   bossActivates() {
     if (this.encounter) {
       if (this.counter <= 10) {
@@ -68,6 +80,9 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * loads images fitting to the corresponding situation and moves them
+   */
   bossMoves() {
     if (this.isDead()) {
       this.defeatedEndboss();
@@ -80,6 +95,9 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * checks if endboss is dying
+   */
   defeatedEndboss() {
     if(this.isDead() && !this.deathAnimationStarted) {
       this.deathAnimationStarted = true;
@@ -89,6 +107,9 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * plays the death animation and ends the game
+   */
   deathAnimation() {
     this.playAnimationOnce(this.IMAGES_DEATH);
     this.counter++;
@@ -98,6 +119,9 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * plays the hurt animation
+   */
   hurtEndboss() {
     this.resetInterval();
     this.setIntervalIdArray = [];
@@ -109,6 +133,9 @@ class Endboss extends MovableObject {
     }, 1000);
   }
 
+  /**
+   * stops the current playing intervals of this class
+   */
   resetInterval() {
     this.stopInterval(this.setIntervalIdArray[0]);
     this.stopInterval(this.setIntervalIdArray[1]);

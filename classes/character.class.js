@@ -65,6 +65,9 @@ class Character extends MovableObject {
     "assets/img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
 
+  /**
+   * loads all relevant functions at the start
+   */
   constructor() {
     super().loadImage("assets/img/2_character_pepe/1_idle/idle/I-1.png");
     this.loadSprites();
@@ -73,6 +76,9 @@ class Character extends MovableObject {
     this.intervalIdCollection(() => this.applyGravity(), 1000 / 30);
   }
 
+  /**
+   * loads all relevant images and stores them
+   */
   loadSprites() {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_JUMPING);
@@ -84,6 +90,9 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_LONG_IDLE);
   }
 
+  /**
+   * loads images fitting to the corresponding situation
+   */
   animate() {
     this.checkLastButton();
     if (this.isDead()) {
@@ -95,6 +104,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * plays the death animation and ends the game
+   */
   deathAnimation() {
     this.playAnimationOnce(this.IMAGES_DEATH);
     this.counter++;
@@ -104,6 +116,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * plays the jump animation
+   */
   jumpAnimation() {
     if ((this.world.keyboard.SPACE || this.isAboveGround()) && this.fallVelocity >= 0) {
       this.playAnimationOnce(this.IMAGES_JUMPING);
@@ -120,6 +135,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * plays the moving animation
+   */
   moveAnimation() {
     if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
       this.playAnimation(this.IMAGES_WALKING);
@@ -127,23 +145,36 @@ class Character extends MovableObject {
     else this.idleAnimation(); 
   }
 
+  /**
+   * plays an idle animation if plays does nothing
+   */
   idleAnimation() {
     if (this.readIdleTime()) {
       this.playAnimation(this.IMAGES_LONG_IDLE);
     } else this.playAnimation(this.IMAGES_IDLE);
   }
 
+  /**
+   * checks if plays has pressed a button to wake the character up
+   */
   checkLastButton() {
     if(this.world.keyboard.SPACE || this.world.keyboard.ENTER || this.world.keyboard.LEFT || this.world.keyboard.RIGHT) {
       this.lastButtonPressed = new Date().getTime();
     }
   }
 
+  /**
+   * checks if plays has done nothing for more than 15 seconds to play
+   * another idle animation
+   */
   readIdleTime() {
     let timePassed = (new Date().getTime() - this.lastButtonPressed) / 1000;
     return timePassed > 15;
   }
 
+  /**
+   * moves character towards a specific direction
+   */
   moveCharacter() {
     if (this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x) {
       this.moveRight(7);
@@ -159,10 +190,16 @@ class Character extends MovableObject {
     this.world.camera_x = -this.position_x + 100;
   }
 
+  /**
+   * sends the player upwards
+   */
   jump(gravity) {
     this.fallVelocity = gravity;
   }
 
+  /**
+   * increases the number of a collectable if touched
+   */
   collectCollectable(index, condition) {
     if (!condition) this.sumCollected[index]++;
   }

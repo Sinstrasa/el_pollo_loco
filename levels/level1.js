@@ -1,5 +1,8 @@
 let level1;
 
+/**
+ * initialises what object stand where with which stats
+ */
 function initLevel() {
   level1 = new Level(
     [

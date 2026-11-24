@@ -10,6 +10,9 @@ class Chicken extends MovableObject {
   ];
   IMAGES_DEATH = ["assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png"];
 
+  /**
+   * loads all relevant functions at the start
+   */
   constructor(start) {
     super().loadImage("assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png");
     this.loadSprites();
@@ -18,11 +21,17 @@ class Chicken extends MovableObject {
     this.intervalIdCollection(() => this.actions(), 1000 / 60);
   }
 
+  /**
+   * loads all relevant images and stores them
+   */
   loadSprites() {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_DEATH);
   }
 
+  /**
+   * loads images fitting to the corresponding situation and moves them
+   */
   actions() {
     if (this.isDead()) {
       this.loadImage(this.IMAGES_DEATH);
