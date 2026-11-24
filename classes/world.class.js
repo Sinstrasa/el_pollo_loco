@@ -234,6 +234,9 @@ class World {
     this.lastThrown = new Date().getTime();
   }
 
+  /**
+   * adds a cooldown for throwing bottles
+   */
   cooldown() {
     let timePassed = new Date().getTime() - this.lastThrown;
     timePassed = timePassed / 1000;
