@@ -73,7 +73,7 @@ class Endboss extends MovableObject {
         this.counter++;
       } else this.playAnimation(this.IMAGES_WALK);
     }
-    if (this.world.character.position_x >= 2150 && !this.encounter) {
+    if (this.world.character.position_x >= 1950 && !this.encounter) {
       this.counter = 0;
       this.encounter = true;
     }

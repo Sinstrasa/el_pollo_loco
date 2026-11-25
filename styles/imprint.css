@@ -1,5 +1,5 @@
 body {
-  display: block;
+  display: flex;
   padding: 48px;
 }
 
@@ -48,6 +48,7 @@ h2 {
 }
 
 a {
+  width: fit-content;
   color: lightblue;
 }
 

@@ -62,13 +62,13 @@ class Tabasko extends MovableObject {
   throwRight() {
     this.position_x = this.world.character.position_x + 100;
     this.position_y = this.world.character.position_y + 50;
-    this.intervalIdCollection(() => this.moveRight(5), 1000 / 60);
+    this.intervalIdCollection(() => this.moveRight(4), 1000 / 60);
   }
 
   throwLeft() {
     this.position_x = this.world.character.position_x - this.world.character.offset.left;
     this.position_y = this.world.character.position_y + 50;
-    this.intervalIdCollection(() => this.moveLeft(5), 1000 / 60);
+    this.intervalIdCollection(() => this.moveLeft(4), 1000 / 60);
   }
 
   /**

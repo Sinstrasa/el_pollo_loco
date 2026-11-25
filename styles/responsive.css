@@ -1,7 +1,7 @@
 @media (orientation: portrait) {
   body {
     display: flex;
-    height: auto;
+    height: 100dvh;
     overflow: hidden;
     background-image: none;
     background-color: black;
@@ -55,6 +55,12 @@
   .mobile_imprint {
     display: block;
     font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1439px) and (pointer: fine) and (orientation: portrait) {
+  .instruction {
+    display: none;
   }
 }
 

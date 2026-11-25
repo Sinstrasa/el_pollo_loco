@@ -115,7 +115,7 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * checks if the hitbox of two objects are hittin each other
+   * checks if the hitbox of two objects are hitting each other
    */
   isColliding(movingObject) {
     return this.hitLeft(movingObject) &&
@@ -127,7 +127,8 @@ class MovableObject extends DrawableObject {
   jumpsOnEnemy(movingObject) {
     return this.hitLeft(movingObject) &&
       this.hitRight(movingObject) &&
-      this.hitBottom(movingObject);
+      this.hitBottom(movingObject) &&
+      this.bufferBottom(movingObject);
   }
 
   hitLeft(movingObject) {
@@ -144,6 +145,10 @@ class MovableObject extends DrawableObject {
 
   hitBottom(movingObject) {
     return this.position_y + this.height > movingObject.position_y + movingObject.offset.top;
+  }
+
+  bufferBottom(movingObject) {
+    return this.position_y + this.height <= movingObject.position_y + movingObject.offset.top + 10;
   }
 
   /**
