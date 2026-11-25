@@ -3,7 +3,7 @@ class Coin extends MovableObject {
   height = 125;
   collectable = 15;
   taken = false;
-  offset = {top: 40, bottom: 80, left: 80, right: 40};
+  offset = {top: 35, bottom: 70, left: 70, right: 35};
   IMAGE_PULSE = [
     "assets/img/8_coin/coin_2.png",
     "assets/img/8_coin/coin_1.png",

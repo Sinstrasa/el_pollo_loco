@@ -20,14 +20,27 @@ function initialise() {
 /**
  * start the game when pressed by the start and reset button
  */
-function startGame(id) {
+function startGame() {
   world.initialiseWorld();
   world.overlay.disappear();
   gameStarted = true;
   playAudio();
-  hideButton(id);
+  hideButton("startButton");
+  hideButton("retryButton");
+  hideButton("homeButton");
   buttonPressed();
   buttonReleased();
+}
+
+function homeScreen() {
+  world.overlay.width = 720;
+  world.overlay.height = 480;
+  world.overlay.position_y = 0;
+  world.overlay.position_x = 0;
+  world.overlay.loadImage(world.overlay.IMAGE_START);
+  hideButton("retryButton");
+  hideButton("homeButton");
+  showButton("startButton");
 }
 
 /**
@@ -146,24 +159,18 @@ document.addEventListener("keyup", (event) => keyReleased(event.key));
 function keyPressed(key) {
   switch (key) {
     case "w":
-    case "W":
     case "i":
-    case "I":
     case " ":
     case "ArrowUp":
       keyboard.SPACE = true;
       break;
     case "a":
-    case "A":
     case "j":
-    case "J":
     case "ArrowLeft":
       keyboard.LEFT = true;
       break;
     case "d":
-    case "D":
     case "l":
-    case "L":
     case "ArrowRight":
       keyboard.RIGHT = true;
       break;
@@ -180,24 +187,18 @@ function keyPressed(key) {
 function keyReleased(key) {
   switch (key) {
     case "w":
-    case "W":
     case "i":
-    case "I":
     case " ":
     case "ArrowUp":
       keyboard.SPACE = false;
       break;
     case "a":
-    case "A":
     case "j":
-    case "J":
     case "ArrowLeft":
       keyboard.LEFT = false;
       break;
     case "d":
-    case "D":
     case "l":
-    case "L":
     case "ArrowRight":
       keyboard.RIGHT = false;
       break;

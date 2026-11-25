@@ -20,7 +20,7 @@
   }
 }
 
-@media screen and (max-width: 1439px) {
+@media screen and (max-width: 1439px) and (pointer: coarse) {
   body {
     gap: 64px;
   }
@@ -28,9 +28,16 @@
   h1 {
     display: none;
   }
+  .gamewrapper {
+    position: static;
+  }
   .buttons_over_canvas {
-    width: 100dvw;
     padding: 16px 32px;
+    width: 100dvw;
+    height: 100dvh;
+  }
+  .miscellaneous {
+    justify-content: space-between;
   }
   .left,
   .right,
@@ -42,6 +49,35 @@
     border: 0px;
     border-radius: 50%;
   }
+  .imprint {
+    display: none;
+  }
+  .mobile_imprint {
+    display: block;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-height: 850px) and (pointer: fine) {
+  h1 {
+    display: none;
+  }
+}
+
+@media screen and (max-height: 600px) and (pointer: fine) {
+  .instruction {
+    padding: 8px;
+    gap: 2px;
+  }
+  .instruction > p {
+    font-size: 20px;
+  }
+  .imprint {
+    display: none;
+  }
+  .mobile_imprint {
+    display: block;
+  }
 }
 
 @media only screen and (max-width: 720px) {
@@ -50,16 +86,15 @@
   }
 }
 
-@media only screen and (max-height: 600px) {
+@media only screen and (max-height: 600px) and (pointer: coarse) {
+  .buttons_over_canvas {
+    width: 100dvw;
+  }
   .miscellaneous {
     justify-content: space-between;
   }
-  .imprint {
-    display: none;
-  }
-  .mobile_imprint {
-    display: block;
-    font-size: 16px;
+  .instruction > p {
+    font-size: 20px;
   }
 }
 
@@ -84,9 +119,6 @@
     gap: 0px;
   }
   .fullscreen {
-    display: none;
-  }
-  .imprint {
     display: none;
   }
 }

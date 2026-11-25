@@ -175,8 +175,8 @@ class World {
         enemy.hit(100);
         } else {
           if(this.character.isColliding(enemy)) {
-          this.character.hit(1);
-          this.level.statusbar[0].setPercentage(0, this.character.health);
+          this.character.hit(5);
+          this.level.statusbar[0].setPercentageHealth(this.character.health);
           }
         }
       }

@@ -16,6 +16,7 @@ main {
   flex-direction: column;
   gap: 24px;
   padding: 24px;
+  width: fit-content;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -47,7 +48,7 @@ h2 {
 }
 
 a {
-  color: lightgray;
+  color: lightblue;
 }
 
 a > img {
@@ -57,7 +58,7 @@ a > img {
 
 @media screen and (max-width: 1406px) {
   main {
-    height: 85dvh;
+    height: 80dvh;
     overflow: auto;
   }
 }

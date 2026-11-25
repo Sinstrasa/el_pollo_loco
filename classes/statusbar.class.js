@@ -43,6 +43,7 @@ class Statusbar extends DrawableObject {
     this.loadSprites();
     this.position_x = position_x;
     this.position_y = position_y;
+    this.setPercentageHealth(percentage);
     this.setPercentage(index, percentage);
   }
 
@@ -65,6 +66,12 @@ class Statusbar extends DrawableObject {
     this.image = this.imageCache[path];
   }
 
+  setPercentageHealth(percentage) {
+    this.percentage = percentage;
+    let path = this.IMAGES_HEALTH[this.resolveImageIndexHealth()];
+    this.image = this.imageCache[path];
+  }
+
   /**
    * checks the sent index for the right statusbar
    */
@@ -82,9 +89,18 @@ class Statusbar extends DrawableObject {
   }
 
   /**
-   * calculates the percentage to show the right asset for the statusbar
+   * calculates the percentage rounded down to show the right
+   * asset for the statusbar
    */
   resolveImageIndex() {
     return Math.floor(this.percentage / 20);
+  }
+
+  /**
+   * calculates the percentage rounded up to show the right
+   * asset for the statusbar
+   */
+  resolveImageIndexHealth() {
+    return Math.ceil(this.percentage / 20);
   }
 }

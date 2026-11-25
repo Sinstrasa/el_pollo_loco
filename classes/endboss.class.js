@@ -71,9 +71,7 @@ class Endboss extends MovableObject {
       if (this.counter <= 10) {
         this.playAnimationOnce(this.IMAGES_ALERT);
         this.counter++;
-      } else {
-        this.playAnimation(this.IMAGES_WALK);
-      }
+      } else this.playAnimation(this.IMAGES_WALK);
     }
     if (this.world.character.position_x >= 2150 && !this.encounter) {
       this.counter = 0;
@@ -93,7 +91,7 @@ class Endboss extends MovableObject {
       } else {
         if (this.counter >= 10 && this.encounter) {
           this.checkDirection();
-          this.moveDirection();
+          this.changeDifficulty();
         } 
       }
     }
@@ -146,11 +144,28 @@ class Endboss extends MovableObject {
   }
 
   /**
+   * increases speed depending of the amount of health
+   */
+  changeDifficulty() {
+    switch (this.health) {
+      case 32:
+        this.moveDirection(12);
+        break;
+      case 66:
+        this.moveDirection(10);
+        break;
+      default:
+        this.moveDirection(8);
+        break;
+    }
+  }
+
+  /**
    * lets the endboss patroll
    */
-  moveDirection() {
-    if(this.direction) this.moveLeft(3.5);
-    else this.moveRight(3.5);
+  moveDirection(speed) {
+    if(this.direction) this.moveLeft(speed);
+    else this.moveRight(speed);
   }
 
   /**

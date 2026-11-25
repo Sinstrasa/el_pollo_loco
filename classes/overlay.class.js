@@ -26,6 +26,7 @@ class Overlay extends MovableObject {
       this.loadImage(this.IMAGE_WIN);
     }
     showButton('retryButton');
+    showButton('homeButton');
   }
 
   /**
