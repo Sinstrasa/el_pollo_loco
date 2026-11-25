@@ -164,21 +164,34 @@ class World {
   }
 
   /**
-   * checks if character jumps on enemy or is getting hit by enemy
+   * checks if character jumps on enemy
    */
   checkHitboxCharacterEnemy() {
+    const wasFalling = this.character.fallVelocity < 0;
+    let stompedEnemy = false;
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead()) return;
-      else {
-        if (this.character.fallVelocity < 0 && this.character.jumpsOnEnemy(enemy) && !(enemy instanceof Endboss)) {
-         this.character.jump(5);
+      if (wasFalling && this.character.jumpsOnEnemy(enemy) && !(enemy instanceof Endboss)) {
         enemy.hit(100);
-        } else {
-          if(this.character.isColliding(enemy)) {
-          this.character.hit(5);
-          this.level.statusbar[0].setPercentageHealth(this.character.health);
-          }
-        }
+        stompedEnemy = true;
+      }
+    });
+    if (stompedEnemy) {
+      this.character.jump(5);
+      return;
+    }
+    this.hurtCharacter();
+  }
+
+  /**
+   * checks if character is getting hit by enemy
+   */
+  hurtCharacter() {
+    this.level.enemies.forEach((enemy) => {
+      if (enemy.isDead()) return;
+      if (this.character.isColliding(enemy)) {
+        this.character.hit(5);
+        this.level.statusbar[0].setPercentageHealth(this.character.health);
       }
     });
   }
